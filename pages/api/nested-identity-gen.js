@@ -38,10 +38,10 @@ const cors = initMiddleware(
  * @swagger
  * /api/nested-identity-gen:
  *   get:
- *     description: Returns a nested identity in the format of { ucn: "uuid", names: ["name1", "name2", "name3"], dobs: ["dob1", "dob2", "dob3"] }
+ *     description: Returns a nested identity
  *     responses:
  *       200:
- *         description: returns a nested identity in the format of { ucn: "uuid", names: ["name1", "name2", "name3"], dobs: ["dob1", "dob2", "dob3"] }
+ *         description: returns a nested identity
 */
 export default async function handler(req, res) {
     await cors(req, res)

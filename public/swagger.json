@@ -54,6 +54,16 @@
           }
         }
       }
+    },
+    "/api/nested-identity-gen": {
+      "get": {
+        "description": "Returns a nested identity",
+        "responses": {
+          "200": {
+            "description": "returns a nested identity"
+          }
+        }
+      }
     }
   },
   "components": {},
