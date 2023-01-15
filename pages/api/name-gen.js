@@ -113,8 +113,27 @@ export function getRandomName(){
     const numOfNames = generateRandomNumber(1, 3)
     let name = ''
     for(let i = 0; i < numOfNames; i++){
-        name += ' ' + getRandomGivenName(gender)
+        name += getRandomGivenName(gender) + ' '
     }
-    name += ' ' + getRandomLastName()
+    name += getRandomLastName()
     return name
+}
+
+export function generateRandomNameGendered(gender){
+    const numOfNames = generateRandomNumber(1, 3)
+    let name = ''
+    for(let i = 0; i < numOfNames; i++){
+        name += getRandomGivenName(gender) + ' '
+    }
+    name += getRandomLastName()
+    return name
+}
+
+export function generateArrayOfNames(num, gender){
+    let result = []
+    for (let i = 0; i < num; i++){
+        const name = generateRandomNameGendered(gender)
+        result.push(name)
+    }
+    return result
 }

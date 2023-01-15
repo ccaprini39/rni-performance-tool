@@ -54,3 +54,11 @@ export function getRandomDobString(){
     const date = getRandomDobDateObject()
     return date.toISOString().split('T')[0]
 }
+
+export function generateArrayOfDobs(number){
+    const dobs = []
+    for (let i = 0; i < number; i++){
+        dobs.push(getRandomDobString())
+    }
+    return dobs
+}

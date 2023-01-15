@@ -2,19 +2,21 @@ import { getRandomDobDateObject, getRandomDobString } from "../../pages/api/dob-
 import { generateNumberOfDobs } from "../../pages/api/dob-number-gen"
 import { getRandomName } from "../../pages/api/name-gen"
 import { generateNumberOfNames } from "../../pages/api/name-number-gen"
+import { getNestedIdentity } from "../../pages/api/nested-identity-gen"
 'no cache'
 
 async function loadData(){
-    const nameSizes = await getArrayOfNumberOfNameLengths(10000)
+    const nameSizes = await getArrayOfNumberOfNameLengths(100)
     const name = await getRandomName()
-    const dobSizes = await getArrayOfNubmerOfDobLengths(50000)
+    const dobSizes = await getArrayOfNubmerOfDobLengths(100)
     const dob = await getRandomDobString()
-    return { nameSizes, name, dobSizes, dob }
+    const nestedObject = await getNestedIdentity()
+    return { nameSizes, name, dobSizes, dob, nestedObject }
 }
 
 
 export default async function DebugPage() {
-    const { nameSizes, name, dobSizes, dob } = await loadData()
+    const { nameSizes, name, dobSizes, dob, nestedObject } = await loadData()
     const { average, min, max } = await getAverageMinMaxFromArrayOfNumbers(nameSizes)
     const { average: dobAverage, min: dobMin, max: dobMax } = await getAverageMinMaxFromArrayOfNumbers(dobSizes)
     return (
@@ -32,6 +34,9 @@ export default async function DebugPage() {
             <p>Min: {dobMin}</p>
             <p>Max: {dobMax}</p>
             <p>dob: {dob}</p>
+
+            <h2>Nested Object</h2>
+            <pre>{JSON.stringify(nestedObject, undefined, 2)}</pre>
 
         </div>   
     )
