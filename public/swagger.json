@@ -5,6 +5,46 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/dob-gen": {
+      "get": {
+        "description": "Returns a random date of birth",
+        "responses": {
+          "200": {
+            "description": "returns a random date of birth"
+          }
+        }
+      }
+    },
+    "/api/dob-number-gen": {
+      "get": {
+        "description": "Returns a random number of dobs for an identity",
+        "responses": {
+          "200": {
+            "description": "returns a random number of dobs for an identity"
+          }
+        }
+      }
+    },
+    "/api/doc": {
+      "get": {
+        "description": "Returns the swagger.json file",
+        "responses": {
+          "200": {
+            "description": "returns the swagger.json file"
+          }
+        }
+      }
+    },
+    "/api/name-gen": {
+      "get": {
+        "description": "Returns a random name in the format of \"First Middle Last\"",
+        "responses": {
+          "200": {
+            "description": "returns a random name in the format of \"First Middle Last\""
+          }
+        }
+      }
+    },
     "/api/name-number-gen": {
       "get": {
         "description": "Returns a random number of names for an identity",

@@ -11,7 +11,7 @@ function initMiddleware(middleware) {
             }
             return resolve(result)
         })
-    })
+        })
 }
 
 // Initialize the cors middleware
@@ -24,33 +24,33 @@ const cors = initMiddleware(
 )
 
 /**
- * Handles the request and response for the API route that generates a random number of names for an identity
+ * Handles the request and response for the API route that generates a random date of birth
  * @param {object} req the request object
  * @param {object} res the response object
- * @returns a JSON object with the value of the random number of names
- * @example { value: 5 }
+ * @returns a JSON object with the value of the random date of birth
+ * @example { dob: "2020-01-01T00:00:00.000Z", dobString: "2020-01-01" }
  * @swagger
- * /api/dob-number-gen:
+ * /api/dob-gen:
  *   get:
- *     description: Returns a random number of dobs for an identity
+ *     description: Returns a random date of birth
  *     responses:
  *       200:
- *         description: returns a random number of dobs for an identity
+ *         description: returns a random date of birth
  */
 export default async function handler(req, res) {
     await cors(req, res)
-    res.status(200).json({ value: generateNumberOfDobs() })
+    res.status(200).json({ dob: getRandomDobDateObject(), dobString: getRandomDobString() })
 }
 
-/**
- * Generates a random number that represents the number of dobs to generate for an identity
- * @returns a random number between 1 and 242, following the distribution given
- * 
- * @example generateNumberOfNames() // returns a random number between 1 and 242
- */
-export function generateNumberOfDobs(){
-    const seed = Math.random()
-    if (seed <= 0.9147604814) return 1
-    else if (seed <= 0.99) return generateRandomNumber(2, 5)
-    else return generateRandomNumber(6, 242)
+export function getRandomDobDateObject(){
+    const year = generateRandomNumber(1900, 2020)
+    const month = generateRandomNumber(0, 11)
+    const day = generateRandomNumber(1, 31)
+    const date = new Date(year, month, day)
+    return date
+}
+
+export function getRandomDobString(){
+    const date = getRandomDobDateObject()
+    return date.toISOString().split('T')[0]
 }

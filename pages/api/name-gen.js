@@ -23,7 +23,20 @@ const cors = initMiddleware(
     })
 )
   
-
+/**
+ * Creates a random name in the format of "First Middle Last"
+ * @param {object} req the request object
+ * @param {object} res the response object
+ * @returns a JSON object with the value of the random name
+ * @example { value: "John Michael Smith" }
+ * @swagger
+ * /api/name-gen:
+ *   get:
+ *     description: Returns a random name in the format of "First Middle Last"
+ *     responses:
+ *       200:
+ *          description: returns a random name in the format of "First Middle Last"
+ */
 export default async function handler(req, res) {
     await cors(req, res)
     res.status(200).json({ value: getRandomName() })

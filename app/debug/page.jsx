@@ -1,25 +1,37 @@
+import { getRandomDobDateObject, getRandomDobString } from "../../pages/api/dob-gen"
+import { generateNumberOfDobs } from "../../pages/api/dob-number-gen"
 import { getRandomName } from "../../pages/api/name-gen"
 import { generateNumberOfNames } from "../../pages/api/name-number-gen"
 'no cache'
 
 async function loadData(){
-    const nameSizes = await getArrayOfNumberOfNames(10000)
+    const nameSizes = await getArrayOfNumberOfNameLengths(10000)
     const name = await getRandomName()
-    return { nameSizes, name }
+    const dobSizes = await getArrayOfNubmerOfDobLengths(50000)
+    const dob = await getRandomDobString()
+    return { nameSizes, name, dobSizes, dob }
 }
 
 
 export default async function DebugPage() {
-    const { nameSizes, name } = await loadData()
+    const { nameSizes, name, dobSizes, dob } = await loadData()
     const { average, min, max } = await getAverageMinMaxFromArrayOfNumbers(nameSizes)
+    const { average: dobAverage, min: dobMin, max: dobMax } = await getAverageMinMaxFromArrayOfNumbers(dobSizes)
     return (
         <div>
             <h1>Debug</h1>
             
+            <h2>Names</h2>
             <p>Avg: {average}</p>
             <p>Min: {min}</p>
             <p>Max: {max}</p>
             <p>name: {name}</p>
+
+            <h2>DOBs</h2>
+            <p>Avg: {dobAverage}</p>
+            <p>Min: {dobMin}</p>
+            <p>Max: {dobMax}</p>
+            <p>dob: {dob}</p>
 
         </div>   
     )
@@ -30,7 +42,7 @@ export default async function DebugPage() {
  * @param {int} number of names
  * @returns 
  */
-export async function getArrayOfNumberOfNames(number) {
+export async function getArrayOfNumberOfNameLengths(number) {
     let namesSizes = []
     for await (const _ of Array(number).keys()) {
         await namesSizes.push(generateNumberOfNames())
@@ -38,19 +50,12 @@ export async function getArrayOfNumberOfNames(number) {
     return namesSizes
 }
 
-async function fetchArrayOfNumberOfNames(number) {
-    let namesSizes = []
+export async function getArrayOfNubmerOfDobLengths(number) {
+    let dobSizes = []
     for await (const _ of Array(number).keys()) {
-        const num = await fetchNum()
-        await namesSizes.push(num)
+        await dobSizes.push(generateNumberOfDobs())
     }
-    return namesSizes
-}
-
-async function fetchNum(){
-    const response = await fetch("http://localhost:3000/api/name-number-gen")
-    const data = await response.json()
-    return data.value
+    return dobSizes
 }
 
 /**

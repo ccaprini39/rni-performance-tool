@@ -10,7 +10,7 @@ function initMiddleware(middleware) {
             }
             return resolve(result)
         })
-        })
+    })
 }
 
 // Initialize the cors middleware
