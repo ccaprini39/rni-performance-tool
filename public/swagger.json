@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "My API",
+    "title": "Performance Testing API",
     "version": "1.0"
   },
   "paths": {
@@ -31,6 +31,16 @@
         "responses": {
           "200": {
             "description": "returns the swagger.json file"
+          }
+        }
+      }
+    },
+    "/api/flatten-nested-identity": {
+      "get": {
+        "description": "Returns a nested identity and the flattened identities",
+        "responses": {
+          "200": {
+            "description": "returns a nested identity and the flattened identities"
           }
         }
       }
