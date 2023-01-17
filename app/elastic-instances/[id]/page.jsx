@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import LoadingComponent from "../../../components/LoadingComponent"
 import { verifyElasticWithTimeout } from "../components/AdminUrl"
 import { sleep } from "../page"
-import IndexTable, { OverAllGrid } from "./components"
+import IndexTable, { checkThatTestingIndicesExist, CreateOneHundredDocsButton, CreateTestingIndicesButton, DeleteTestingIndicesButton, OverAllGrid, RecreateTestingIndicesButton } from "./components"
 
 export default function InstancePage({params}){
 
@@ -21,6 +21,7 @@ export default function InstancePage({params}){
     const [url, setUrl] = useState('')
     const [name, setName] = useState('')
     const [value, setValue] = useState(0)
+    const [testingIndiciesExist, setTestingIndiciesExist] = useState(false)
     const toggleValue = () => setValue(value === 0 ? 1 : 0)
 
     useEffect(() => {
@@ -30,8 +31,11 @@ export default function InstancePage({params}){
             setHealth(await getElasticInstanceHealth(url))
             setPlugins(await getElasticPlugins(url))
             setIndices(await getNonHiddenIndices(url))
+            const indices = await getNonHiddenIndices(url)
             setNodeStats(await getElasticNodesStats(url))
             setClusterStats(await getElasticClusterStats(url))
+            setTestingIndiciesExist(await checkThatTestingIndicesExist(url))
+            console.log(indices)
             setUrl(url)
             setName(name)
             await sleep(500)
@@ -47,7 +51,7 @@ export default function InstancePage({params}){
             <span>
                 <h3 style={headerStyle}>
                     Instance Url: {url}
-                    <IconButton size="large" color="primary" onClick={toggleValue}>
+                    <IconButton size="large" color="success" onClick={toggleValue}>
                         <Refresh />
                     </IconButton>
                 </h3>
@@ -60,6 +64,24 @@ export default function InstancePage({params}){
                 clusterStats={clusterStats} 
             />
             <IndexTable indices={indices} />
+            {testingIndiciesExist ?
+                //the indices exist
+                <>
+                    <span>
+                        <CreateOneHundredDocsButton toggle={toggleValue} url={url} />
+                        <br />
+                    </span>
+                    <span>
+                        <DeleteTestingIndicesButton toggle={toggleValue} url={url} />
+                        <RecreateTestingIndicesButton toggle={toggleValue} url={url} />
+                    </span>
+                </>
+                :
+                <>
+                    <CreateTestingIndicesButton toggle={toggleValue} url={url} />
+                </>
+            }
+
         </div>
     )
 }
@@ -143,10 +165,25 @@ export async function getNonHiddenIndices(url){
             method: 'GET'
         })
         const data = await res.json()
-        return data
+        const copy = []
+        for await (const element of data) {
+            if(!element.index.startsWith('.')){
+                const realCount = await getCountOfDocsInIndex(url, element.index)
+                copy.push({...element, count : realCount })
+            }
+        }
+        return copy
     } catch (error) {
         return false
     }
+}
+
+export async function getCountOfDocsInIndex(url, index){
+    const res = await fetch(`${url}/${index}/_count`, {
+        method: 'GET'
+    })
+    const data = await res.json()
+    return data.count
 }
 
 

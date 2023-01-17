@@ -58,7 +58,7 @@ export function getRandomDobString(){
 export function generateArrayOfDobs(number){
     const dobs = []
     for (let i = 0; i < number; i++){
-        dobs.push(getRandomDobString())
+        dobs.push({dob : getRandomDobString()})
     }
     return dobs
 }

@@ -86,3 +86,17 @@ export function getPostRequestOptions(bodyJson = null){
         body : JSON.stringify(bodyJson)
     }
 }
+
+/**
+ * helper function to get the options for a post request. Same as getPostRequestOptions but with a string body
+ * @param {string} bodyString body of the request
+ */
+export function getPostRequestOptionsStringBody(bodyString){
+    return {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body : bodyString
+    }
+}

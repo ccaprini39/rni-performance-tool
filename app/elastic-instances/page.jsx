@@ -139,20 +139,45 @@ async function processHits(arrayOfHits){
  * @returns the response from ElasticSearch
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
  */
-export async function createIndex(url, index, mapping = null) {
-    let res
-    if (mapping === null) {
-        res = await fetch(`${url}/${index}?format=json`, {
-            method: 'PUT'
-        })
-    } else {
-        res = await fetch(`${url}/${index}?format=json`, {
-        method: 'PUT',
-        body: JSON.stringify(mapping)
-        })
+export async function createIndex(url, index, mappings = null){
+    let requestOptions = getPutRequestOptions(mappings)
+    let response 
+    try {
+        response = await fetch(`${url}/${index}?format=json`, requestOptions)
+        if (response.ok){
+            response = await response.json()
+            return response
+        } else {
+            response = await response.json()
+            throw new Error(response.error.type)
+        }      
+    } catch (error) {
+        response = {error : error.message}
+        return response
     }
-    const data = await res.json()
-    return data
+}
+
+/**
+ * helper function to get the options for a PUT request
+ * @param {object} bodyJson
+ * @returns the options for a PUT request
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+ */
+export function getPutRequestOptions(bodyJson = null){
+    if (bodyJson === null) {
+        return {
+            method: 'PUT',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }
+    } else return {
+        method: 'PUT',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body : JSON.stringify(bodyJson)
+    }
 }
 
 const availableUrlsMapping = {

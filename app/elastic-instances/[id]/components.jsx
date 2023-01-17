@@ -1,10 +1,13 @@
 'use client'
-import { Card, CardContent, FormControlLabel, Switch, Typography } from "@mui/material"
+import { Button, Card, CardContent, FormControlLabel, Switch, Typography } from "@mui/material"
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
 import { AgGridReact, AgGridColumn } from "ag-grid-react"
 import "ag-grid-community/dist/styles/ag-grid.css"
 import "ag-grid-community/dist/styles/ag-theme-alpine.css"
 import { useEffect, useState } from "react"
+import { bulkIndexDocs, createBulkDocsInIndex, deleteIndex, getMappingForIndex } from "./utils"
+import { createIndex } from "../page"
+import { generateOneHundredBulkObjects } from "../../../pages/api/flatten-nested-identity"
 
 export function SimpleCard({title, body, color}){
     if(title === null || title === undefined) title = 'Simple Card'
@@ -122,7 +125,8 @@ export default function IndexTable({ indices, id }) {
             >
                 <AgGridColumn field="index" cellRenderer={(params) => <IndexLinkComponent id={id} value={params.value} />}></AgGridColumn>
                 <AgGridColumn field="pri.store.size"></AgGridColumn>
-                <AgGridColumn field="docs.count"></AgGridColumn>
+                <AgGridColumn field="count"></AgGridColumn>
+                <AgGridColumn headerName="Total Docs" field="docs.count"></AgGridColumn>
                 <AgGridColumn field="docs.deleted"></AgGridColumn>
                 <AgGridColumn field="store.size"></AgGridColumn>
             </AgGridReact>
@@ -130,9 +134,244 @@ export default function IndexTable({ indices, id }) {
     )
 }
 
+/**
+ * helper function, used to be a link, may one day be a link again, but for now it's just a p tag
+ * @param {object} object with value and id 
+ * @returns a react component to show th name of the index
+ */
 function IndexLinkComponent({ value, id }) {
     if (!value) return 'null'
     return (
         <p>{value}</p>
     )
+}
+
+/**
+ * Recreates the testing indices
+ * @param {object} props
+ * @param {string} props.url the url of the elasticsearch instance
+ * @param {string} props.index the name of the index to recreate
+ * @returns a button that recreates the testing indices
+ * @example
+ * <RecreateIndexButton url="http://localhost:9200" index="rni-nested" />
+ */
+export const RecreateTestingIndicesButton = ({ url, toggle }) => {
+    async function handleClick() {
+        const exist = await checkThatTestingIndicesExist(url)
+        if (exist) await deleteTestingIndices(url)
+        await createTestingIndices(url)
+        toggle()
+    }
+    return (
+        <Button variant="outlined" color="secondary" onClick={handleClick}>Recreate Testing Indices</Button>
+    )
+}
+
+/**
+ * gets the mapping for a given index
+ * @param {string} url the url of the elasticsearch instance
+ * @param {string} indexName the name of the index to get the mapping for
+ * @returns the mapping for the given index
+ * @example
+ * const mapping = await getMappingForIndex('http://localhost:9200', 'rni-nested')
+ */
+export function getMappingForTestIndex(indexName) {
+    switch (indexName) {
+        case 'rni-nested':
+            return rniNestedMapping
+        case 'rni-nested-dobs':
+            return rniNestedDobMapping
+        case 'rni-flat':
+            return rniFlatMapping
+        default:
+            return null
+    }
+}
+
+/**
+ * mapping for the rni-nested index
+ * @type {object}
+ */
+export const rniNestedMapping = 
+{
+    "mappings" : {
+        "properties" : {
+            "uuid" : {
+                "type" : "keyword"
+            },
+            "names" : {
+                "type" : "nested",
+                "properties" : {
+                    "name" : {
+                        "type" : "rni_name"
+                    }
+                }
+            },
+            "dobs" : {
+                "type" : "nested",
+                "properties" : {
+                    "dob" : {
+                        "type" : "rni_date"
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * mapping for the rni-nested-dobs index
+ * @type {object}
+ */
+export const rniNestedDobMapping =
+{
+    "mappings" : {
+        "properties" : {
+            "ucn" : {
+                "type" : "keyword"
+            },
+            "name" : {
+                "type" : "rni_name"
+            },
+            "dobs" : {
+                "type" : "nested",
+                "properties" : {
+                    "dob" : {
+                        "type" : "rni_date"
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * mapping for the rni-flat index
+ * @type {object}
+ */
+export const rniFlatMapping =
+{
+    "mappings": {
+      "properties": {
+        "dob": {
+          "type": "rni_date"
+        },
+        "name": {
+          "type": "rni_name"
+        },
+        "ucn": {
+          "type": "keyword"
+        }
+      }
+    }
+}
+
+/**
+ * verifies that an index exists
+ * @param {string} url the url of the elasticsearch instance
+ * @param {string} indexName the name of the index to check
+ * @returns true if the index exists, false if it does not
+ * @example
+ * const indexExists = await checkThatIndexExists('http://localhost:9200', 'rni-nested')
+ * console.log(indexExists) // true
+ */
+export async function checkThatIndexExists(url, indexName){
+    const indexExists = await fetch(url + '/' + indexName, {timeout: 1000})
+    if (indexExists.status === 404) {
+        return false
+    }
+    return true
+}
+
+/**
+ * creates the indices used for testing
+ * @param {string} url the url of the elasticsearch instance
+ */
+export async function createTestingIndices(url){
+    const indices = ['rni-nested', 'rni-nested-dobs', 'rni-flat']
+    for await (const index of indices) {
+        const mapping = getMappingForTestIndex(index)
+        await createIndex(url, index, mapping)
+    }
+}
+
+/**
+ * checks that the testing indices exist
+ * @param {string} url the url of the elasticsearch instance
+ * @returns true if all the testing indices exist, false if one or more do not
+ * @example
+ * const indicesExist = await checkThatTestingIndicesExist('http://localhost:9200')
+ * console.log(indicesExist) // true
+ */
+export async function checkThatTestingIndicesExist(url){
+    const indices = ['rni-nested', 'rni-nested-dobs', 'rni-flat']
+    for await (const index of indices) {
+        const exists = await checkThatIndexExists(url, index)
+        if (!exists) {
+            return false
+        }
+    }
+    return true
+}
+
+/**
+ * deletes the testing indices
+ * @param {string} url the url of the elasticsearch instance
+ * @example
+ * await deleteTestingIndices('http://localhost:9200')
+ */
+export async function deleteTestingIndices(url){
+    const indices = ['rni-nested', 'rni-nested-dobs', 'rni-flat']
+    for await (const index of indices) {
+        await deleteIndex(url, index)
+    }
+}
+
+/**
+ * Button for deleting testing indices
+ * @param {string} url the url of the elasticsearch instance
+ * @returns a button that deletes testing indices
+ * @example
+ * <DeleteTestingIndicesButton url='http://localhost:9200' />
+ */
+export function DeleteTestingIndicesButton({ url, toggle }) {
+    async function handleClick() {
+        await deleteTestingIndices(url)
+        toggle()
+    }
+    return (
+        <Button variant="contained" color="error" onClick={handleClick}>Delete Testing Indices</Button>
+    )
+}
+
+/**
+ * Button for creating testing indices
+ * @param {string} url the url of the elasticsearch instance
+ * @returns a button that creates testing indices
+ * @example
+ * <CreateTestingIndicesButton url='http://localhost:9200' />
+ */
+export function CreateTestingIndicesButton({ url, toggle }) {
+    async function handleClick() {
+        await createTestingIndices(url)
+        toggle()
+    }
+    return (
+        <Button variant="contained" color="success" onClick={handleClick}>Create Testing Indices</Button>
+    )
+}
+
+export function CreateOneHundredDocsButton({ url, toggle }){
+    async function handleClick() {
+        await createOneHundredDocs(url)
+        toggle()
+    }
+    return (
+        <Button variant="contained" color="success" onClick={handleClick}>Create 100 Docs</Button>
+    )
+}
+
+export async function createOneHundredDocs(url){
+    const string = await generateOneHundredBulkObjects()
+    await createBulkDocsInIndex(url, string)
 }

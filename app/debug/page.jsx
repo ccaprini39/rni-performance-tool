@@ -1,24 +1,27 @@
-import { getRandomDobDateObject, getRandomDobString } from "../../pages/api/dob-gen"
+import { getRandomDobString } from "../../pages/api/dob-gen"
 import { generateNumberOfDobs } from "../../pages/api/dob-number-gen"
+import { generateBulkObjectGivenNested, generateObjectwithAll, generateOneHundredBulkObjects } from "../../pages/api/flatten-nested-identity"
 import { getRandomName } from "../../pages/api/name-gen"
 import { generateNumberOfNames } from "../../pages/api/name-number-gen"
-import { getNestedIdentity } from "../../pages/api/nested-identity-gen"
 'no cache'
 
 async function loadData(){
-    const nameSizes = await getArrayOfNumberOfNameLengths(100)
+    const nameSizes = await getArrayOfNumberOfNameLengths(1000)
     const name = await getRandomName()
-    const dobSizes = await getArrayOfNubmerOfDobLengths(100)
+    const dobSizes = await getArrayOfNubmerOfDobLengths(1000)
     const dob = await getRandomDobString()
-    const nestedObject = await getNestedIdentity()
-    return { nameSizes, name, dobSizes, dob, nestedObject }
+    const all = await generateObjectwithAll()
+    const bulkString = await generateBulkObjectGivenNested(all.nestedIdentity)
+    const bigBulkString = await generateOneHundredBulkObjects()
+    return { nameSizes, name, dobSizes, dob, all, bulkString, bigBulkString }
 }
 
 
 export default async function DebugPage() {
-    const { nameSizes, name, dobSizes, dob, nestedObject } = await loadData()
+    const { nameSizes, name, dobSizes, dob, all, bulkString, bigBulkString } = await loadData()
     const { average, min, max } = await getAverageMinMaxFromArrayOfNumbers(nameSizes)
     const { average: dobAverage, min: dobMin, max: dobMax } = await getAverageMinMaxFromArrayOfNumbers(dobSizes)
+
     return (
         <div>
             <h1>Debug</h1>
@@ -35,8 +38,14 @@ export default async function DebugPage() {
             <p>Max: {dobMax}</p>
             <p>dob: {dob}</p>
 
-            <h2>Nested Object</h2>
-            <pre>{JSON.stringify(nestedObject, undefined, 2)}</pre>
+            <h2>Nested and Flattened</h2>
+            <pre>{JSON.stringify(all, undefined, 2)}</pre>
+
+            <h2>Bulk String</h2>
+            <pre>{bulkString}</pre>
+
+            <h2>Big Bulk String</h2>
+            <pre>{bigBulkString}</pre>
 
         </div>   
     )

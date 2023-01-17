@@ -1,3 +1,5 @@
+import { getPostRequestOptionsStringBody } from "../components/AddUrl"
+
 /**
  * Delete an index
  * @param {string} url
@@ -29,19 +31,18 @@ export async function getMappingForIndex(url, index) {
 }
 
 /**
- * Bulk index documents in ElasticSearch
- * @param {string} url 
- * @param {string} index 
- * @param {string} docsString 
- * @returns true if successful, false if not
+ * bulk index documents
+ * @param {string} url the url of the ElasticSearch instance
+ * @param {string} docsString the string of documents to index
+ * @returns true if successful
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+ * @example
+ * const docsString = `{"index":{"_index":"rni-nested"}}\n${JSON.stringify(initialObject)}\n`
  */
-export async function bulkIndexDocs(url, index, docsString) {
-    const res = await fetch(`${url}/${index}/_bulk?format=json`, {
-        method: 'POST',
-        body: docsString
-    })
-    const data = await res.json()
-    if(data.errors) return false
-    else return true
+export async function createBulkDocsInIndex(url, docsString){
+    let requestOptions = getPostRequestOptionsStringBody(docsString)
+    let response = await fetch(`${url}/_bulk?format=json`, requestOptions)
+    return response.ok
 }
+
+

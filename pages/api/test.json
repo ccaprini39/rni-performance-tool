@@ -1,0 +1,2291 @@
+{
+    "took": 59,
+    "errors": true,
+    "items": [
+        {
+            "index": {
+                "_index": "rni-nested",
+                "_type": "_doc",
+                "_id": "s2GjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "tGGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "tWGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 36,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested",
+                "_type": "_doc",
+                "_id": "tmGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "t2GjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "uGGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "uWGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "umGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "u2GjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "vGGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "vWGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "vmGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "v2GjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "wGGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "wWGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "wmGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "w2GjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "xGGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "xWGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 37,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "xmGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 38,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "x2GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 39,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "yGGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 40,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "yWGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 41,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "ymGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 42,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "y2GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 43,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "zGGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 44,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "zWGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 45,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "zmGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 46,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "z2GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 47,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "0GGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 48,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "0WGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 49,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "0mGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 50,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested",
+                "_type": "_doc",
+                "_id": "02GjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "1GGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "1WGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "1mGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 51,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "12GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 52,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested",
+                "_type": "_doc",
+                "_id": "2GGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "2WGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "2mGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "22GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 53,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "3GGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 54,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested",
+                "_type": "_doc",
+                "_id": "3WGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "3mGjvYUBnZs7r6LXCVbp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "32GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 55,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "4GGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 56,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "4WGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 57,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "4mGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 58,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "42GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 59,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "5GGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 60,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "5WGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 61,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "5mGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 62,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "52GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 63,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "6GGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 64,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "6WGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 65,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "6mGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 66,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "62GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 67,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "7GGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 68,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "7WGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 69,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "7mGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 70,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "72GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 71,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "8GGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 72,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "8WGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 73,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "8mGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 74,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "82GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 75,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "9GGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 76,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "9WGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 77,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "9mGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 78,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "92GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 79,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "-GGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 80,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "-WGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 81,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "-mGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 82,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "-2GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 83,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "_GGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 84,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "_WGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 85,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "_mGjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 86,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "_2GjvYUBnZs7r6LXCVbp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 87,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "AGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 88,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "AWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 89,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "AmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 90,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "A2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 91,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "BGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 92,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "BWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 93,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "BmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 94,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "B2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 95,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "CGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 96,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "CWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 97,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "CmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 98,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "C2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 99,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "DGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 100,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "DWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 101,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "DmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 102,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "D2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 103,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "EGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 104,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "EWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 105,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "EmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 106,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "E2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 107,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "FGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 108,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "FWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 109,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "FmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 110,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "F2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 111,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "GGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 112,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "GWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 113,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "GmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 114,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "G2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 115,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "HGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 116,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "HWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 117,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "HmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 118,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "H2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 119,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "IGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 120,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "IWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 121,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "ImGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 122,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "I2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 123,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "JGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 124,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "JWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 125,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "JmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 126,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "J2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 127,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "KGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 128,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "KWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 129,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "KmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 130,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "K2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 131,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "LGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 132,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "LWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 133,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "LmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 134,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "L2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 135,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested",
+                "_type": "_doc",
+                "_id": "MGGjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "MWGjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "MmGjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "M2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 136,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "NGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 137,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested",
+                "_type": "_doc",
+                "_id": "NWGjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "NmGjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "N2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 138,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested",
+                "_type": "_doc",
+                "_id": "OGGjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "OWGjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "OmGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 139,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "O2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 140,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "PGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 141,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "PWGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 142,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested",
+                "_type": "_doc",
+                "_id": "PmGjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "P2GjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "QGGjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 143,
+                "_primary_term": 1,
+                "status": 201
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested",
+                "_type": "_doc",
+                "_id": "QWGjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-nested-dobs",
+                "_type": "_doc",
+                "_id": "QmGjvYUBnZs7r6LXCVfp",
+                "status": 400,
+                "error": {
+                    "type": "mapper_parsing_exception",
+                    "reason": "object mapping for [dobs] tried to parse field [null] as object, but found a concrete value"
+                }
+            }
+        },
+        {
+            "index": {
+                "_index": "rni-flat",
+                "_type": "_doc",
+                "_id": "Q2GjvYUBnZs7r6LXCVfp",
+                "_version": 1,
+                "result": "created",
+                "_shards": {
+                    "total": 2,
+                    "successful": 1,
+                    "failed": 0
+                },
+                "_seq_no": 144,
+                "_primary_term": 1,
+                "status": 201
+            }
+        }
+    ]
+}
