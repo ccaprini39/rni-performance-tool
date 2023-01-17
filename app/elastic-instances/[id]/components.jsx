@@ -1,10 +1,10 @@
 'use client'
-import { Card, CardContent, Typography } from "@mui/material"
+import { Card, CardContent, FormControlLabel, Switch, Typography } from "@mui/material"
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
 import { AgGridReact, AgGridColumn } from "ag-grid-react"
 import "ag-grid-community/dist/styles/ag-grid.css"
 import "ag-grid-community/dist/styles/ag-theme-alpine.css"
-import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export function SimpleCard({title, body, color}){
     if(title === null || title === undefined) title = 'Simple Card'
@@ -85,6 +85,17 @@ export function OverAllGrid({ health, plugins, indices, nodesStats, clusterStats
 }
 
 export default function IndexTable({ indices, id }) {
+    const [hiddenStatus, setHiddenStatus] = useState(true)
+    const [currentIndices, setCurrentIndices] = useState(indices)
+
+    useEffect(() => {
+        if (hiddenStatus) {
+            setCurrentIndices(indices.filter((index) => index.index[0] !== '.'))
+        }
+        else {
+            setCurrentIndices(indices)
+        }
+    }, [hiddenStatus])
 
     const defaultColDef = {
         flex: 1,
@@ -96,9 +107,15 @@ export default function IndexTable({ indices, id }) {
 
     return (
         <div>
+            <FormControlLabel 
+                control={<Switch checked={!hiddenStatus} onChange={() => setHiddenStatus(!hiddenStatus)} />}
+                label="Show Hidden Indices"
+                labelPlacement="start"
+            />
+            
             <AgGridReact 
                 className="ag-theme-alpine" 
-                rowData={indices}
+                rowData={currentIndices}
                 domLayout="autoHeight"
                 defaultColDef={defaultColDef}
                 suppressFieldDotNotation={true}
@@ -116,6 +133,6 @@ export default function IndexTable({ indices, id }) {
 function IndexLinkComponent({ value, id }) {
     if (!value) return 'null'
     return (
-        <Link className="mui-link" href={`/elastic-instances/${id}/${value}`}>{value}</Link>
+        <p>{value}</p>
     )
 }

@@ -2,9 +2,9 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import LoadingComponent from "../../components/LoadingComponent";
-import { getPostRequestOptions } from "./[id]/components/AddUrl";
-import AdminUrl, { verifyElasticWithTimeout } from "./[id]/components/AdminUrl";
-import UrlList from "./[id]/components/UrlList";
+import { getPostRequestOptions } from "./components/AddUrl";
+import AdminUrl, { verifyElasticWithTimeout } from "./components/AdminUrl";
+import UrlList from "./components/UrlList";
 
 //this is a react component that will check to see if the database url is set in the cookies
 //if it is, it will display the list of elastic instances from the index 'available-urls'
