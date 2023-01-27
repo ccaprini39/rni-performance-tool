@@ -14,7 +14,6 @@ export default function ResultsComparisonChart({ data }){
 
     return (
         <>
-            <h1>text</h1>
             <Button fullWidth onClick={toggleOpen}>{open ? 'Close Graph' : 'Open Graph'}</Button>
             <Collapse in={open}>
                 <div style={{width: '90%', height:'100%', margin: 'auto'}}>
