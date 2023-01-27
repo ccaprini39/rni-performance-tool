@@ -1,5 +1,4 @@
 import Cors from 'cors'
-import { generateRandomNumber } from './name-number-gen'
 import { getNestedIdentity } from './nested-identity-gen'
 
 function initMiddleware(middleware) {
@@ -28,7 +27,7 @@ const cors = initMiddleware(
  * @param {object} req the request object
  * @param {object} res the response object
  * @returns a JSON object with the value of the nested identity and the flattened identities
- * @example { ucn: "uuid", names: ["name1", "name2", "name3"], dobs: ["dob1", "dob2", "dob3"] }
+ * @example { ucn: "uuid", aliases: ["name1", "name2", "name3"], birth_dates: ["dob1", "dob2", "dob3"] }
  * @swagger
  * /api/flatten-nested-identity:
  *   get:
@@ -39,10 +38,10 @@ const cors = initMiddleware(
  */
 export default async function handler(req, res) {
     await cors(req, res)
-    res.status(200).json(generateObjectwithAll())
+    res.status(200).json(await generateObjectWithAll())
 }
 
-export async function generateObjectwithAll(){
+export async function generateObjectWithAll(){
     const nestedIdentity = await getNestedIdentity()
     const flattenedNames = flattenNames(nestedIdentity)
     const flattenedEverything = flattenEverything(nestedIdentity)
@@ -56,12 +55,12 @@ export async function generateObjectwithAll(){
  */
 export function flattenNames(nestedIdentity){
     let copy = []
-    nestedIdentity.names.forEach(name => {
+    nestedIdentity.aliases.forEach(name => {
         copy.push(
             {
                 ucn: nestedIdentity.ucn,
                 ...name,
-                dobs: nestedIdentity.dobs
+                birth_dates: nestedIdentity.birth_dates
             }
         )
     })
@@ -75,8 +74,8 @@ export function flattenNames(nestedIdentity){
  */
 export function flattenEverything(nestedIdentity){
     let copy = []
-    nestedIdentity.names.forEach(name => {
-        nestedIdentity.dobs.forEach(dob => {
+    nestedIdentity.aliases.forEach(name => {
+        nestedIdentity.birth_dates.forEach(dob => {
             copy.push(
                 {
                     ucn: nestedIdentity.ucn,
@@ -103,13 +102,13 @@ export async function generateBulkObject(){
 
     let nestedDobArray = await flattenNames(initialObject)
     nestedDobArray.forEach(element => {
-        string = string + JSON.stringify({ "index" : {"_index" : "rni-nested-dobs"}, "_id" : null}) + '\n' + 
+        string = string + JSON.stringify({ "index" : {"_index" : "rni-nested-dobs"}}) + '\n' + 
             JSON.stringify(element) + '\n'
     })
 
     let flatArray = await flattenEverything(initialObject)
     flatArray.forEach(element => {
-        string = string + JSON.stringify({ "index" : {"_index" : "rni-flat"}, "_id" : null}) + '\n' + 
+        string = string + JSON.stringify({ "index" : {"_index" : "rni-flat"}}) + '\n' + 
             JSON.stringify(element) + '\n'
     })
     return string
@@ -128,18 +127,30 @@ export async function generateBulkObjectGivenNested(nestedIdentity){
 
     let nestedDobArray = await flattenNames(nestedIdentity)
     nestedDobArray.forEach(element => {
-        string = string + JSON.stringify({ "index" : {"_index" : "rni-nested-dobs"}, "_id" : null}) + '\n' + 
+        string = string + JSON.stringify({ "index" : {"_index" : "rni-nested-dobs"}}) + '\n' + 
             JSON.stringify(element) + '\n'
     })
 
     let flatArray = await flattenEverything(nestedIdentity)
     flatArray.forEach(element => {
-        string = string + JSON.stringify({ "index" : {"_index" : "rni-flat"}, "_id" : null}) + '\n' + 
+        string = string + JSON.stringify({ "index" : {"_index" : "rni-flat"}}) + '\n' + 
             JSON.stringify(element) + '\n'
     })
     return string
 }
 
+/**
+ * Generates a bulk string for Elasticsearch with 100 nested identities and their flattened versions.
+ * @returns a bulk string for ElasticSearch
+ * @example { "index" : {"_index" : "rni-nested"}} + '\n' + JSON.stringify(initialObject) + '\n'
+//  * swagger may use this in the future
+//  * /api/flatten-nested-identity:
+//  *   get:
+//  *     description: Returns a bulk string for ElasticSearch with 100 nested identities and their flattened versions.
+//  *     responses:
+//  *       200:
+//  *         description: returns a bulk string for ElasticSearch with 100 nested identities and their flattened versions.
+ */
 export async function generateOneHundredBulkObjects(){
     let string = ''
     for await (const _ of Array(100).keys()) {

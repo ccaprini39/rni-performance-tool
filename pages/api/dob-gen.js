@@ -11,7 +11,7 @@ function initMiddleware(middleware) {
             }
             return resolve(result)
         })
-        })
+    })
 }
 
 // Initialize the cors middleware
@@ -58,7 +58,7 @@ export function getRandomDobString(){
 export function generateArrayOfDobs(number){
     const dobs = []
     for (let i = 0; i < number; i++){
-        dobs.push({dob : getRandomDobString()})
+        dobs.push({birth_date : getRandomDobString()})
     }
     return dobs
 }

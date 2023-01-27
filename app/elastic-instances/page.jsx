@@ -2,8 +2,8 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import LoadingComponent from "../../components/LoadingComponent";
-import { getPostRequestOptions } from "./components/AddUrl";
-import AdminUrl, { verifyElasticWithTimeout } from "./components/AdminUrl";
+import { getAvailableElasticUrls, sleep } from "../../pages/api/create-search-object";
+import AdminUrl from "./components/AdminUrl";
 import UrlList from "./components/UrlList";
 
 //this is a react component that will check to see if the database url is set in the cookies
@@ -58,9 +58,7 @@ export default function ElasticInstances({}) {
 
 }
 
-export async function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+
 
 function AdminInstructionsNoCookie(){
     return (
@@ -75,132 +73,3 @@ function AdminInstructionsNoCookie(){
     )
 }
 
-export const matchAllQuerySearch = {
-    "size" : 1000,
-    "query": {
-        "match_all": {}
-    }
-}
-
-/**
- * This function will get the cookie for the admin elastic instance, if it exists.  
- * If it does, it will return the list of available elastic urls.  If it does not, it will return false
- * If the cookie is valid but the index 'available-urls' does not exist, it will create the index and call itself again
- * @returns the list of available elastic urls or false
- */
-export async function getAvailableElasticUrls(){
-    //get the cookie for the admin elastic instance
-    let cookie = Cookies.get('adminElasticUrl')
-    if(cookie){
-        const valid = await verifyElasticWithTimeout(cookie)
-        if(!valid){
-            console.log('Admin elastic url is not valid')
-            return false
-        }
-        let requestOptions = getPostRequestOptions(matchAllQuerySearch)
-        let response = await fetch(`${cookie}/available-urls/_search?format=json`, requestOptions)
-        if (!response.ok) {
-            response = await response.json()
-            if (response.error.type === 'index_not_found_exception') {
-                await createIndex(cookie, 'available-urls', availableUrlsMapping)
-                //yes this is recursive, but it should only happen once unless elastic isn't running
-                response = await getAvailableElasticUrls()
-                return response
-            }
-        }
-        response = await response.json()
-        response = await processHits(response.hits.hits)
-        return response
-    }else{
-        //if the cookie does not exist, return false
-        console.log('No admin elastic url set')
-        return false
-    }
-}
-
-/**
- * This function will take the array of hits from the elastic search response and return an array of objects
- * @param {array} arrayOfHits
- * @returns an array of objects
- */
-async function processHits(arrayOfHits){
-    let urlObjects = []
-    arrayOfHits.forEach(hit => {
-        urlObjects.push({...hit._source, id: hit._id})
-    })
-    return urlObjects
-}
-
-/**
- * Create an index
- * @param {string} url
- * @param {string} index
- * @param {object} mapping
- * @returns the response from ElasticSearch
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
- */
-export async function createIndex(url, index, mappings = null){
-    let requestOptions = getPutRequestOptions(mappings)
-    let response 
-    try {
-        response = await fetch(`${url}/${index}?format=json`, requestOptions)
-        if (response.ok){
-            response = await response.json()
-            return response
-        } else {
-            response = await response.json()
-            throw new Error(response.error.type)
-        }      
-    } catch (error) {
-        response = {error : error.message}
-        return response
-    }
-}
-
-/**
- * helper function to get the options for a PUT request
- * @param {object} bodyJson
- * @returns the options for a PUT request
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
- */
-export function getPutRequestOptions(bodyJson = null){
-    if (bodyJson === null) {
-        return {
-            method: 'PUT',
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        }
-    } else return {
-        method: 'PUT',
-        headers: new Headers({
-            'Content-Type': 'application/json'
-        }),
-        body : JSON.stringify(bodyJson)
-    }
-}
-
-const availableUrlsMapping = {
-    "mappings": {
-        "properties": {
-            "name": {
-                "type": "text",
-                "fields": {
-                "keyword": {
-                    "type": "keyword",
-                    "ignore_above": 256
-                }
-                }
-            },
-            "url": {
-                "type": "text",
-                "fields": {
-                "keyword": {
-                    "type": "keyword",
-                    "ignore_above": 256
-                }
-                }
-            }
-        }
-    }
-}

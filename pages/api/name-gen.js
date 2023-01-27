@@ -133,7 +133,7 @@ export function generateArrayOfNames(num, gender){
     let result = []
     for (let i = 0; i < num; i++){
         const name = generateRandomNameGendered(gender)
-        result.push({name : name})
+        result.push({primary_name : name})
     }
     return result
 }

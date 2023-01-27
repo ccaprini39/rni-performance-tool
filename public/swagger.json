@@ -5,6 +5,16 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/create-search-object": {
+      "get": {
+        "description": "Returns a search object with a random name, dob, and number of names",
+        "responses": {
+          "200": {
+            "description": "returns a search object with a random name, dob, and number of names"
+          }
+        }
+      }
+    },
     "/api/dob-gen": {
       "get": {
         "description": "Returns a random date of birth",

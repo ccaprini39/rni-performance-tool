@@ -1,0 +1,25 @@
+{
+    "mappings" : {
+        "properties" : {
+            "uuid" : {
+                "type" : "keyword"
+            },
+            "aliases" : {
+                "type" : "nested",
+                "properties" : {
+                    "primary_name" : {
+                        "type" : "rni_name"
+                    }
+                }
+            },
+            "birth_dates" : {
+                "type" : "nested",
+                "properties" : {
+                    "birth_date" : {
+                        "type" : "rni_date"
+                    }
+                }
+            }
+        }
+    }
+}

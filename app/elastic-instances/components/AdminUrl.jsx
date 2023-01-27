@@ -3,6 +3,7 @@
 import { Button, FormGroup, TextField } from "@mui/material"
 import Cookies from "js-cookie"
 import { useState } from "react"
+import { verifyElasticWithTimeout } from "../../../pages/api/create-search-object"
 
 export default function AdminUrl({toggle}){
     const [adminUrlInput, setAdminUrlInput] = useState('') 
@@ -46,22 +47,3 @@ export default function AdminUrl({toggle}){
     )
 }
 
-/**
- * helper function to verify that the url is a valid elastic url
- * @param {string} url 
- * @param {int} timeout timeout in milliseconds
- * @returns 
- */
-export async function verifyElasticWithTimeout(url, timeout = 100){
-    let response
-    try {
-        response = await fetch(url, {timeout: timeout})
-        let responseJson = await response.json()
-        if(response.ok && responseJson.cluster_name){
-            return "Elastic is up and running: cluster name is : " + responseJson.cluster_name
-        }
-    } catch (error) {
-        return false
-    }
-    return false
-}

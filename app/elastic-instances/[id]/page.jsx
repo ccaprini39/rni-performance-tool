@@ -1,13 +1,12 @@
 'use client'
 
 import { Refresh } from "@mui/icons-material"
-import { IconButton } from "@mui/material"
+import { Button, CircularProgress, FormGroup, FormLabel, IconButton, Input, TextField } from "@mui/material"
 import Cookies from "js-cookie"
 import { useEffect, useState } from "react"
 import LoadingComponent from "../../../components/LoadingComponent"
-import { verifyElasticWithTimeout } from "../components/AdminUrl"
-import { sleep } from "../page"
-import IndexTable, { checkThatTestingIndicesExist, CreateOneHundredDocsButton, CreateTestingIndicesButton, DeleteTestingIndicesButton, OverAllGrid, RecreateTestingIndicesButton } from "./components"
+import { sleep, verifyElasticWithTimeout } from "../../../pages/api/create-search-object"
+import IndexTable, { checkThatTestingIndicesExist, createOneHundredDocs, CreateOneHundredDocsButton, CreateTestingIndicesButton, DeleteTestingIndicesButton, OverAllGrid, RecreateTestingIndicesButton } from "./components"
 
 export default function InstancePage({params}){
 
@@ -35,7 +34,6 @@ export default function InstancePage({params}){
             setNodeStats(await getElasticNodesStats(url))
             setClusterStats(await getElasticClusterStats(url))
             setTestingIndiciesExist(await checkThatTestingIndicesExist(url))
-            console.log(indices)
             setUrl(url)
             setName(name)
             await sleep(500)
@@ -68,7 +66,7 @@ export default function InstancePage({params}){
                 //the indices exist
                 <>
                     <span>
-                        <CreateOneHundredDocsButton toggle={toggleValue} url={url} />
+                        <CreateDocsForm toggle={toggleValue} url={url} />
                         <br />
                     </span>
                     <span>
@@ -239,8 +237,73 @@ export async function basicGetRequest(url){
     return result
 }
 
+/**
+ * checks if a number is a multiple of 100
+ * @param {number} number the number to check
+ * @returns true if the number is a multiple of 100, false if not
+ * @example checkMultipleOfHundred(100) //returns true
+ * @example checkMultipleOfHundred(101) //returns false
+ */
+export function checkMultipleOfHundred (number){
+    if(number % 100 === 0){
+        return true
+    }else{
+        return false
+    }
+}
+
+/**
+ * bulk indexes a multiple of 100 nested documents and their flattened versions
+ * @param {string} url the url of the elastic instance
+ * @param {number} number the number of documents to index
+ */
+export async function multipleBulkIndex(url, number){
+    const iterations = Math.floor(number / 100)
+    for await (const _ of Array(iterations).keys()) {
+        await createOneHundredDocs(url)
+    }
+}
+
+function CreateDocsForm({url, toggle}){
+    //this react component is a form that has an input for the number of documents to create
+    //this value will be validated to make sure it is a multiple of 100
+    //if it is not a multiple of 100, the submit button will be disabled
+    const [number, setNumber] = useState(0)
+    const [valid, setValid] = useState(false)
+    const [running, setRunning] = useState(false)
+    
+    useEffect(() => {
+        if(checkMultipleOfHundred(number)){
+            setValid(true)
+        }else{
+            setValid(false)
+        }
+    }, [number])
+
+    async function handleSubmit(){
+        setRunning(true)
+        await multipleBulkIndex(url, number)
+        setRunning(false)
+        toggle()
+    }
+
+    if(running) return <CircularProgress />
+    else return (
+        <FormGroup style={formStyle} row>
+            <TextField 
+                label="Number of documents to create" type="number" name="number" id="number" placeholder="number" value={number} onChange={(e) => setNumber(e.target.value)} />
+            <Button variant="contained" color="success" disabled={!valid || running} onClick={handleSubmit}>Create</Button>
+        </FormGroup>
+    )
+}
+
 const headerStyle = 
 {
     display: 'flex',
     justifyContent: 'space-between'
+}
+
+const formStyle =
+{
+    paddingTop: '10px'
 }

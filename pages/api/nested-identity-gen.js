@@ -30,11 +30,11 @@ const cors = initMiddleware(
 )
 
 /**
- * Creates a nested identity in the format of { ucn: "uuid", names: ["name1", "name2", "name3"], dobs: ["dob1", "dob2", "dob3"] }
+ * Creates a nested identity in the format of { ucn: "uuid", aliases: ["name1", "name2", "name3"], birth_dates: ["dob1", "dob2", "dob3"] }
  * @param {object} req the request object
  * @param {object} res the response object
  * @returns a JSON object with the value of the nested identity
- * @example { ucn: "uuid", names: ["name1", "name2", "name3"], dobs: ["dob1", "dob2", "dob3"] }
+ * @example { ucn: "uuid", aliases: ["name1", "name2", "name3"], birth_dates: ["dob1", "dob2", "dob3"] }
  * @swagger
  * /api/nested-identity-gen:
  *   get:
@@ -59,8 +59,8 @@ export async function getNestedIdentity() {
 
     return {
         ucn: uuid,
-        names: names,
-        dobs: dobs
+        aliases: names,
+        birth_dates: dobs
     }
 }
 

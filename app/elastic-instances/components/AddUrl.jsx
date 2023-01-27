@@ -3,6 +3,8 @@
 import { Add, Publish, Remove } from "@mui/icons-material"
 import { FormGroup, IconButton, TextField } from "@mui/material"
 import { useState } from "react"
+import { getPostRequestOptions } from "../../../pages/api/create-search-object"
+
 
 //React component that allows the user to add a new url to the database
 export default function AddUrl({toggle}) {
@@ -62,41 +64,4 @@ export async function addItemToAvailableUrls({name, url}){
     })
     requestOptions.method = 'POST'
     await fetch(`${url}/available-urls/_doc`, requestOptions)
-}
-
-
-/**
- * helper function to get the options for a post request
- * @param {object} bodyJson body of the request
- * @returns 
- */
-export function getPostRequestOptions(bodyJson = null){
-    if (bodyJson === null) {
-        return {
-            method: 'POST',
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        }
-    } else return {
-        method: 'POST',
-        headers: new Headers({
-            'Content-Type': 'application/json'
-        }),
-        body : JSON.stringify(bodyJson)
-    }
-}
-
-/**
- * helper function to get the options for a post request. Same as getPostRequestOptions but with a string body
- * @param {string} bodyString body of the request
- */
-export function getPostRequestOptionsStringBody(bodyString){
-    return {
-        method: 'POST',
-        headers: new Headers({
-            'Content-Type': 'application/json'
-        }),
-        body : bodyString
-    }
 }

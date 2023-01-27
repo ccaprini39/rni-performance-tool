@@ -5,9 +5,9 @@ import { AgGridReact, AgGridColumn } from "ag-grid-react"
 import "ag-grid-community/dist/styles/ag-grid.css"
 import "ag-grid-community/dist/styles/ag-theme-alpine.css"
 import { useEffect, useState } from "react"
-import { bulkIndexDocs, createBulkDocsInIndex, deleteIndex, getMappingForIndex } from "./utils"
-import { createIndex } from "../page"
+import { createBulkDocsInIndex, deleteIndex } from "./utils"
 import { generateOneHundredBulkObjects } from "../../../pages/api/flatten-nested-identity"
+import { createIndex, defaultOptions } from "../../../pages/api/create-search-object"
 
 export function SimpleCard({title, body, color}){
     if(title === null || title === undefined) title = 'Simple Card'
@@ -199,18 +199,18 @@ export const rniNestedMapping =
             "uuid" : {
                 "type" : "keyword"
             },
-            "names" : {
+            "aliases" : {
                 "type" : "nested",
                 "properties" : {
-                    "name" : {
+                    "primary_name" : {
                         "type" : "rni_name"
                     }
                 }
             },
-            "dobs" : {
+            "birth_dates" : {
                 "type" : "nested",
                 "properties" : {
-                    "dob" : {
+                    "birth_date" : {
                         "type" : "rni_date"
                     }
                 }
@@ -230,13 +230,13 @@ export const rniNestedDobMapping =
             "ucn" : {
                 "type" : "keyword"
             },
-            "name" : {
+            "primary_name" : {
                 "type" : "rni_name"
             },
-            "dobs" : {
+            "birth_dates" : {
                 "type" : "nested",
                 "properties" : {
-                    "dob" : {
+                    "birth_date" : {
                         "type" : "rni_date"
                     }
                 }
@@ -253,10 +253,10 @@ export const rniFlatMapping =
 {
     "mappings": {
       "properties": {
-        "dob": {
+        "birth_date": {
           "type": "rni_date"
         },
-        "name": {
+        "primary_name": {
           "type": "rni_name"
         },
         "ucn": {
@@ -361,6 +361,13 @@ export function CreateTestingIndicesButton({ url, toggle }) {
     )
 }
 
+/**
+ * Button to create 100 nested documents in the rni-nested index and the corresponding documents in the rni-nested-dobs and rni-flat indices
+ * @param {string} url the url of the elasticsearch instance
+ * @returns a button that creates 100 nested documents
+ * @example
+ * <Create100NestedDocumentsButton url='http://localhost:9200' />
+ */
 export function CreateOneHundredDocsButton({ url, toggle }){
     async function handleClick() {
         await createOneHundredDocs(url)
@@ -371,7 +378,28 @@ export function CreateOneHundredDocsButton({ url, toggle }){
     )
 }
 
+/**
+ * creates 100 nested docs and the corresponding flattened docs
+ * @param {string} url the url of the elasticsearch instance
+ */
 export async function createOneHundredDocs(url){
     const string = await generateOneHundredBulkObjects()
     await createBulkDocsInIndex(url, string)
+}
+
+
+export function AutoSearchButton({ url, options }){
+    if (!options) {
+        options = defaultOptions
+    }
+    async function handleClick() {
+        await autoSearch(url, options)
+    }
+    return (
+        <Button variant="contained" color="success" onClick={handleClick}>Auto Search</Button>
+    )
+}
+
+AutoSearchButton.defaultProps = {
+    options : defaultOptions
 }

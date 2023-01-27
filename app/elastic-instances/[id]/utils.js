@@ -1,4 +1,4 @@
-import { getPostRequestOptionsStringBody } from "../components/AddUrl"
+import { getPostRequestOptionsStringBody } from "../../../pages/api/create-search-object"
 
 /**
  * Delete an index

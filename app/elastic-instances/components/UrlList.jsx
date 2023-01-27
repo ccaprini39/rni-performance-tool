@@ -2,10 +2,11 @@
 
 import { Check, Close, Delete, Edit } from "@mui/icons-material"
 import { CircularProgress, IconButton, List, ListItem, Typography } from "@mui/material"
+import Cookies from "js-cookie"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import AddUrl, { getPostRequestOptions } from "./AddUrl"
-import { verifyElasticWithTimeout } from "./AdminUrl"
+import { getPostRequestOptions, verifyElasticWithTimeout } from "../../../pages/api/create-search-object"
+import AddUrl from "./AddUrl"
 
 export default function UrlList({ urlObjects, toggle }) {
     return (
@@ -26,15 +27,15 @@ export default function UrlList({ urlObjects, toggle }) {
 
 function UrlListHeader() {
     return (
-        <ListItem className='admin-url-list-object'>
-            <Typography variant='h6' style={adminUrlListStyle}>
+        <ListItem>
+            <Typography variant='h6' style={adminUrlListUrlStyle}>
                 Url
             </Typography>
             <Typography variant='h6' style={adminUrlListNameStyle}>
                 Name
             </Typography>
             <Typography variant='h6' style={adminUrlListButtonStyle}>
-                Available
+                available?
             </Typography>
             <Typography variant='h6' style={adminUrlListButtonStyle}>
                 Edit
