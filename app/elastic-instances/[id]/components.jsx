@@ -407,7 +407,8 @@ export function AutoSearchForm({ url, urlName }){
             description,
             urlName,
             {windowSize : windowSize}
-            )
+        )
+        console.log(results)    
         setResults(results)
         setLoading(false)
     }
@@ -441,7 +442,6 @@ export function AutoSearchForm({ url, urlName }){
             </FormGroup>
             {results && //if there are results, make the chart available
                 <ModalWrapper style={{width: '90vw'}}>
-                    <Button>close</Button>
                     <ResultsComparisonChart data={results} />
                 </ModalWrapper>
             }

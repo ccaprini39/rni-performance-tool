@@ -38,9 +38,6 @@ function UrlListHeader() {
                 available?
             </Typography>
             <Typography variant='h6' style={adminUrlListButtonStyle}>
-                Edit
-            </Typography>
-            <Typography variant='h6' style={adminUrlListButtonStyle}>
                 Delete
             </Typography> 
         </ListItem>
@@ -70,21 +67,18 @@ function UrlListItem({ urlObject, toggle }) {
     return (
         <ListItem style={adminUrlListStyle}>
             <Typography style={adminUrlListUrlStyle}>
-                <Link style={{color: 'inherit', textDecoration: 'none'}} href={`elastic-instances/${urlObject.id}`}>
+                <Link href={`elastic-instances/${urlObject.id}`}>
                     {urlObject.url}
                 </Link>
             </Typography>
             <Typography style={adminUrlListNameStyle}>
-                <Link style={{color: 'inherit', textDecoration: 'none'}} href={`elastic-instances/${urlObject.id}`}>
+                <Link href={`elastic-instances/${urlObject.id}`}>
                     {urlObject.name}
                 </Link>
             </Typography>
             <IconButton style={adminUrlListButtonStyle}>
                 {loading ? <CircularProgress size='1em' /> : valid ? <Check color="success" /> : <Close color="error"/>}
-            </IconButton>
-            <IconButton disabled style={adminUrlListButtonStyle}>
-                <Edit />
-            </IconButton>           
+            </IconButton>       
             <IconButton color='error' onClick={handleDelete} style={adminUrlListButtonStyle}>
                 <Delete />
             </IconButton> 

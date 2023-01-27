@@ -22,7 +22,7 @@ export default function ElasticInstances({}) {
     useEffect(() => {
         async function loadElasticInstances(){
             setLoading(true)
-            await sleep(500)
+            await sleep(1000)
             const cookiesUrl = await Cookies.get('adminElasticUrl')
             if(!cookiesUrl){
                 setCookiesUrl(false)

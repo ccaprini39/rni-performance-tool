@@ -36,7 +36,7 @@ export default function InstancePage({params}){
             setTestingIndiciesExist(await checkThatTestingIndicesExist(url))
             setUrl(url)
             setName(name)
-            await sleep(500)
+            await sleep(1500)
             setLoading(false)
         }
         loadInstance()
@@ -70,7 +70,7 @@ export default function InstancePage({params}){
                         <br />
                     </span>
                     <span>
-                        <AutoSearchForm toggle={toggleValue} url={url} /> 
+                        <AutoSearchForm url={url} urlName={name} /> 
                     </span>
                     <br />
                     <span>

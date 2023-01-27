@@ -38,7 +38,7 @@ const cors = initMiddleware(
  */
 export default async function handler(req, res) {
     await cors(req, res)
-    res.status(200).json({ value: createSearchObject() })
+    res.status(200).json({ value: await createSearchObject() })
 }
 
 //takes in a url and optional search object and returns a promise
