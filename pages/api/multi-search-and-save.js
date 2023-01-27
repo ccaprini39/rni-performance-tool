@@ -2,17 +2,16 @@ import { createSearchObject, multiQuery } from "./create-search-object"
 
 
 /**
- * Function that executes multiple searches, gathers the results, and gives results to be saved to the past-tests index
- * note that this function doesn't actually save the results to the past-tests index
+ * Function that executes multiple searches, gathers the results, and gives results to be saved to the previous-tests index
+ * note that this function doesn't actually save the results to the previous-tests index
  * @param {string} url the url of the ElasticSearch instance
  * @param {number} number 
  * @param {string} description used to identify the test later
- * @param {string} testId  used to identify the test later
  * @param {string} urlName the name associated with the url
  * @param {object} searchOptions for the query, see createSearchObject
  * @returns a promise that resolves to an object with the results of the test
  */
-export async function multiAutoSearch(url, number, description, testId, urlName, searchOptions){
+export async function multiAutoSearch(url, number, description, urlName, searchOptions){
     //warmup function: executes 5 iterations of the search to warm up the cache
     for await (const _ of Array(5).keys()){
         const randomSearch = await createSearchObject(searchOptions)
@@ -39,7 +38,6 @@ export async function multiAutoSearch(url, number, description, testId, urlName,
         urlName : name,
         timeExecuted : time,
         description : description,
-        testId : testId,
         nestedIndexCount : nested_index_count,
         nestedDobsIndexCount : nested_dobs_index_count,
         flatIndexCount : flat_index_count,

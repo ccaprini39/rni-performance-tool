@@ -1,5 +1,5 @@
 'use client'
-import { Button, Card, CardContent, FormControlLabel, Switch, Typography } from "@mui/material"
+import { Button, Card, CardContent, CircularProgress, FormControlLabel, FormGroup, Switch, TextField, Typography } from "@mui/material"
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
 import { AgGridReact, AgGridColumn } from "ag-grid-react"
 import "ag-grid-community/dist/styles/ag-grid.css"
@@ -8,6 +8,8 @@ import { useEffect, useState } from "react"
 import { createBulkDocsInIndex, deleteIndex } from "./utils"
 import { generateOneHundredBulkObjects } from "../../../pages/api/flatten-nested-identity"
 import { createIndex, defaultOptions } from "../../../pages/api/create-search-object"
+import { getDateTimeString, multiAutoSearch } from "../../../pages/api/multi-search-and-save"
+import ResultsComparisonChart, { Test } from "../../../pages/shared-components/ResultsComparisonGraph"
 
 export function SimpleCard({title, body, color}){
     if(title === null || title === undefined) title = 'Simple Card'
@@ -387,6 +389,62 @@ export async function createOneHundredDocs(url){
     await createBulkDocsInIndex(url, string)
 }
 
+//This is a function that will have a form with 2 inputs, one for the window size and one for the number of queries to run for each index
+export function AutoSearchForm({ url, urlName }){
+    const [windowSize, setWindowSize] = useState(100)
+    const [numQueries, setNumQueries] = useState(10)
+    const [description, setDescription] = useState(getDateTimeString('simple'))
+    const [results, setResults] = useState(null)
+    const [loading, setLoading] = useState(false)
+
+    async function handleSubmit(event){
+        event.preventDefault()
+        setLoading(true)
+        const results = await multiAutoSearch(
+            url, 
+            numQueries,
+            description,
+            urlName,
+            {windowSize : windowSize}
+            )
+        setResults(results)
+        setLoading(false)
+    }
+
+    if(loading){ return <CircularProgress /> }
+    else return (
+        <>
+            <FormGroup style={{display : 'flex'}} row>
+                <TextField
+                    style={{flex : 1}}
+                    label="Window Size"
+                    type="number"
+                    value={windowSize}
+                    onChange={(event) => setWindowSize(event.target.value)}
+                />
+                <TextField
+                    style={{flex : 1}}
+                    label="Number of Queries"
+                    type="number"
+                    value={numQueries}
+                    onChange={(event) => setNumQueries(event.target.value)}
+                />
+                <TextField
+                    style={{flex : 3}}
+                    label="Description"
+                    type="text"
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)}
+                />
+                <Button variant="contained" color="success" onClick={handleSubmit}>Auto Search</Button>
+            </FormGroup>
+            {results && //if there are results, make the chart available
+                <ResultsComparisonChart data={results} />
+            }
+        </>
+
+    )
+}
 
 export function AutoSearchButton({ url, options }){
     if (!options) {
@@ -396,7 +454,7 @@ export function AutoSearchButton({ url, options }){
         await autoSearch(url, options)
     }
     return (
-        <Button variant="contained" color="success" onClick={handleClick}>Auto Search</Button>
+        <Button variant="contained" color="success" onClick={handleClick}>Run Queries</Button>
     )
 }
 

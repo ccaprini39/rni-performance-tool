@@ -8,9 +8,9 @@ async function loadData(){
     const urls = await getAvailableElasticUrls('http://ec2-18-219-118-71.us-east-2.compute.amazonaws.com:9200')
     const randomSearch = await createSearchObject()
     const searchResult = await multiQuery(url, randomSearch)
-    const multiAutoSearchResultWindow10 = await multiAutoSearch(url, 10, 'test', 'testId', 'random', {window_size: 10})
-    const multiAutoSearchResultWindow100 = await multiAutoSearch(url, 10, 'test', 'testId', 'random', defaultOptions)
-    const multiAutoSearchResultWindow1000 = await multiAutoSearch(url, 10, 'test', 'testId', 'random', {window_size: 1000})
+    const multiAutoSearchResultWindow10 = await multiAutoSearch(url, 10, 'test', 'random', {window_size: 10})
+    const multiAutoSearchResultWindow100 = await multiAutoSearch(url, 10, 'test', 'random', defaultOptions)
+    const multiAutoSearchResultWindow1000 = await multiAutoSearch(url, 10, 'test', 'random', {window_size: 1000})
     return { url, urls, randomSearch, searchResult, searchResult, 
         multiAutoSearchResultWindow10, multiAutoSearchResultWindow100, multiAutoSearchResultWindow1000
     }
@@ -18,7 +18,7 @@ async function loadData(){
 
 export default async function TestPage() {
 
-    const { url, urls, randomSearch, searchResult, 
+    const {
         multiAutoSearchResultWindow10, multiAutoSearchResultWindow100, multiAutoSearchResultWindow1000
     } = await loadData()
 

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import LoadingComponent from "../../../components/LoadingComponent"
 import { sleep, verifyElasticWithTimeout } from "../../../pages/api/create-search-object"
 import { getCountOfDocsInIndex } from "../../../pages/api/multi-search-and-save"
-import IndexTable, { checkThatTestingIndicesExist, createOneHundredDocs, CreateOneHundredDocsButton, CreateTestingIndicesButton, DeleteTestingIndicesButton, OverAllGrid, RecreateTestingIndicesButton } from "./components"
+import IndexTable, { AutoSearchForm, checkThatTestingIndicesExist, createOneHundredDocs, CreateOneHundredDocsButton, CreateTestingIndicesButton, DeleteTestingIndicesButton, OverAllGrid, RecreateTestingIndicesButton } from "./components"
 
 export default function InstancePage({params}){
 
@@ -31,7 +31,6 @@ export default function InstancePage({params}){
             setHealth(await getElasticInstanceHealth(url))
             setPlugins(await getElasticPlugins(url))
             setIndices(await getNonHiddenIndices(url))
-            const indices = await getNonHiddenIndices(url)
             setNodeStats(await getElasticNodesStats(url))
             setClusterStats(await getElasticClusterStats(url))
             setTestingIndiciesExist(await checkThatTestingIndicesExist(url))
@@ -70,6 +69,10 @@ export default function InstancePage({params}){
                         <CreateDocsForm toggle={toggleValue} url={url} />
                         <br />
                     </span>
+                    <span>
+                        <AutoSearchForm toggle={toggleValue} url={url} /> 
+                    </span>
+                    <br />
                     <span>
                         <DeleteTestingIndicesButton toggle={toggleValue} url={url} />
                         <RecreateTestingIndicesButton toggle={toggleValue} url={url} />
@@ -295,7 +298,7 @@ const headerStyle =
     justifyContent: 'space-between'
 }
 
-const formStyle =
+export const formStyle =
 {
     paddingTop: '10px'
 }
