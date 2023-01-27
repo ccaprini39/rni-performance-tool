@@ -10,6 +10,7 @@ import { generateOneHundredBulkObjects } from "../../../pages/api/flatten-nested
 import { createIndex, defaultOptions } from "../../../pages/api/create-search-object"
 import { getDateTimeString, multiAutoSearch } from "../../../pages/api/multi-search-and-save"
 import ResultsComparisonChart, { Test } from "../../../pages/shared-components/ResultsComparisonGraph"
+import ModalWrapper from "../../../pages/shared-components/ModalWrapper"
 
 export function SimpleCard({title, body, color}){
     if(title === null || title === undefined) title = 'Simple Card'
@@ -439,7 +440,10 @@ export function AutoSearchForm({ url, urlName }){
                 <Button variant="contained" color="success" onClick={handleSubmit}>Auto Search</Button>
             </FormGroup>
             {results && //if there are results, make the chart available
-                <ResultsComparisonChart data={results} />
+                <ModalWrapper style={{width: '90vw'}}>
+                    <Button>close</Button>
+                    <ResultsComparisonChart data={results} />
+                </ModalWrapper>
             }
         </>
 
