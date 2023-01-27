@@ -6,6 +6,7 @@ import Cookies from "js-cookie"
 import { useEffect, useState } from "react"
 import LoadingComponent from "../../../components/LoadingComponent"
 import { sleep, verifyElasticWithTimeout } from "../../../pages/api/create-search-object"
+import { getCountOfDocsInIndex } from "../../../pages/api/multi-search-and-save"
 import IndexTable, { checkThatTestingIndicesExist, createOneHundredDocs, CreateOneHundredDocsButton, CreateTestingIndicesButton, DeleteTestingIndicesButton, OverAllGrid, RecreateTestingIndicesButton } from "./components"
 
 export default function InstancePage({params}){
@@ -175,15 +176,6 @@ export async function getNonHiddenIndices(url){
         return false
     }
 }
-
-export async function getCountOfDocsInIndex(url, index){
-    const res = await fetch(`${url}/${index}/_count`, {
-        method: 'GET'
-    })
-    const data = await res.json()
-    return data.count
-}
-
 
 /**
  * Gets an available elastic url by id

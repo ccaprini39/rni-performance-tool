@@ -1,47 +1,42 @@
-import { createSearchObject, getAvailableElasticUrls, getRandomElasticUrl, multiQuery } from "../../pages/api/create-search-object"
-import { getRandomDobString } from "../../pages/api/dob-gen"
+import { createSearchObject, defaultOptions, getAvailableElasticUrls, getRandomElasticUrl, multiQuery } from "../../pages/api/create-search-object"
 import { generateNumberOfDobs } from "../../pages/api/dob-number-gen"
-import { generateBulkObjectGivenNested, generateObjectWithAll, generateOneHundredBulkObjects } from "../../pages/api/flatten-nested-identity"
-import { getRandomName } from "../../pages/api/name-gen"
+import { multiAutoSearch } from "../../pages/api/multi-search-and-save"
 import { generateNumberOfNames } from "../../pages/api/name-number-gen"
 
 'no cache'
 
 async function loadData(){
     const urls = await await getAvailableElasticUrls('http://ec2-18-219-118-71.us-east-2.compute.amazonaws.com:9200')
-    const nameSizes = await getArrayOfNumberOfNameLengths(1000)
-    const name = await getRandomName()
-    const dobSizes = await getArrayOfNubmerOfDobLengths(1000)
-    const dob = await getRandomDobString()
-    const all = await generateObjectWithAll()
-    const bulkString = await generateBulkObjectGivenNested(all.nestedIdentity)
-    const bigBulkString = await generateOneHundredBulkObjects()
     const randomSearch = await createSearchObject()
-    const randomSearchWithWindow = await createSearchObject({window_size: 1000})
-    const randomSearchNameOnly = await createSearchObject({primary_name: true})
-    const randomSearchDobOnly = await createSearchObject({birth_date: true})
-    const randomSearchNameAndDob = await createSearchObject({primary_name: true, birth_date: true})
-    const randomSearchNameAndDobWithWindow = await createSearchObject({primary_name: true, birth_date: true, window_size: 1000})
-    const randomSearchDobWithWindow = await createSearchObject({birth_date: true, window_size: 1000})
-    const randomSearchNameWithWindow = await createSearchObject({primary_name: true, window_size: 1000})
     const randomUrl = await getRandomElasticUrl()
     const searchResult = await multiQuery(randomUrl, randomSearch)
-    return { nameSizes, name, dobSizes, dob, all, bulkString, bigBulkString, 
-        randomSearch, randomSearchWithWindow, randomSearchNameOnly, randomSearchDobOnly, 
-        randomSearchNameAndDob, randomSearchNameAndDobWithWindow, randomSearchDobWithWindow, randomSearchNameWithWindow,
-        randomUrl, searchResult, urls
+    const multiAutoSearchResult = await multiAutoSearch(randomUrl, 100, 'test', 'testId', 'random', defaultOptions)
+    const multiAutoSearchResultWindow1000 = await multiAutoSearch(randomUrl, 100, 'test', 'testId', 'random', {window_size: 1000})
+    const multiAutoSearchResultsWindow10000 = await multiAutoSearch(randomUrl, 100, 'test', 'testId', 'random', {window_size: 10000})
+    return {
+        randomUrl, searchResult, urls, 
+        multiAutoSearchResult, multiAutoSearchResultWindow1000, multiAutoSearchResultsWindow10000,
     }
 }
 
 
 export default async function DebugPage() {
-    const { nameSizes, name, dobSizes, dob, all, bulkString, bigBulkString,
-        randomSearch, randomSearchWithWindow, randomSearchNameOnly, randomSearchDobOnly,
-        randomSearchNameAndDob, randomSearchNameAndDobWithWindow, randomSearchDobWithWindow, randomSearchNameWithWindow,
-        randomUrl, searchResult, urls
+    const {
+        randomUrl, urls,
+        multiAutoSearchResult, multiAutoSearchResultWindow1000, multiAutoSearchResultsWindow10000
     } = await loadData()
-    const { average, min, max } = await getAverageMinMaxFromArrayOfNumbers(nameSizes)
-    const { average: dobAverage, min: dobMin, max: dobMax } = await getAverageMinMaxFromArrayOfNumbers(dobSizes)
+
+    const regularNestedAvg = multiAutoSearchResult.nested_avg
+    const regularNestedDobsAvg = multiAutoSearchResult.nested_dobs_avg
+    const regularFlatAvg = multiAutoSearchResult.flat_avg
+
+    const window1000NestedAvg = multiAutoSearchResultWindow1000.nested_avg
+    const window1000NestedDobsAvg = multiAutoSearchResultWindow1000.nested_dobs_avg
+    const window1000FlatAvg = multiAutoSearchResultWindow1000.flat_avg
+
+    const window10000NestedAvg = multiAutoSearchResultsWindow10000.nested_avg
+    const window10000NestedDobsAvg = multiAutoSearchResultsWindow10000.nested_dobs_avg
+    const window10000FlatAvg = multiAutoSearchResultsWindow10000.flat_avg
 
     return (
         <div>
@@ -50,43 +45,31 @@ export default async function DebugPage() {
             <h2>Urls</h2>
             <pre>{JSON.stringify(urls, null, 2)}</pre>
 
-            <h2>Nested and Flattened</h2>
-            <pre>{JSON.stringify(all, undefined, 2)}</pre>
-
-            <h2>Bulk String</h2>
-            <pre>{bulkString}</pre>
-
-            {/* <h2>Big Bulk String</h2>
-            <pre>{bigBulkString}</pre> */}
-
             <h2>Url</h2>
             <pre>{randomUrl}</pre>
 
-            <h2>Random Search</h2>
-            <pre>{JSON.stringify(randomSearch, undefined, 2)}</pre>
-            <h6>result: </h6>
-            <pre>{JSON.stringify(searchResult, undefined, 2)}</pre>
+            <h2>Auto Search</h2>
+            <pre>{JSON.stringify(multiAutoSearchResult, undefined, 2)}</pre>
 
-            <h2>Random Search With Window</h2>
-            <pre>{JSON.stringify(randomSearchWithWindow, undefined, 2)}</pre>
+            <h2>Auto Search With Window</h2>
+            <pre>{JSON.stringify(multiAutoSearchResultWithWindow, undefined, 2)}</pre>
 
-            <h2>Random Search Name Only</h2>
-            <pre>{JSON.stringify(randomSearchNameOnly, undefined, 2)}</pre>
+            <h2>Averages: </h2>
 
-            <h2>Random Search Dob Only</h2>
-            <pre>{JSON.stringify(randomSearchDobOnly, undefined, 2)}</pre>
+            <h4>Regular Nested {regularNestedAvg}</h4>
+            <h4>Regular Nested Dob {regularNestedDobsAvg}</h4>
+            <h4>Regular Flat {regularFlatAvg}</h4>
+            <br/>
 
-            <h2>Random Search Name And Dob</h2>
-            <pre>{JSON.stringify(randomSearchNameAndDob, undefined, 2)}</pre>
+            <h4>1000 Window Nested {window1000NestedAvg}</h4>
+            <h4>1000 Window Nested Dobs {window1000NestedDobsAvg}</h4>
+            <h4>1000 Window Flat {window1000FlatAvg}</h4>
+            <br/>
 
-            <h2>Random Search Name And Dob With Window</h2>
-            <pre>{JSON.stringify(randomSearchNameAndDobWithWindow, undefined, 2)}</pre>
-
-            <h2>Random Search Dob With Window</h2>
-            <pre>{JSON.stringify(randomSearchDobWithWindow, undefined, 2)}</pre>
-
-            <h2>Random Search Name With Window</h2>
-            <pre>{JSON.stringify(randomSearchNameWithWindow, undefined, 2)}</pre>
+            <h4>10000 Window Nested {window10000NestedAvg}</h4>
+            <h4>10000 Window Nested Dobs {window10000NestedDobsAvg}</h4>
+            <h4>10000 Window Flat {window10000FlatAvg}</h4>
+            <br/>
 
         </div>   
     )

@@ -52,12 +52,8 @@ export async function autoSearch(url, options){
 //creates a search object based on the options
 export async function createSearchObject(options = defaultOptions){
     const search = {}
-    if (options.primary_name) {
-        search.primary_name = getRandomName()
-    }  else if(!options.birth_date) {search.primary_name = getRandomName()} //if no birth date, then we need a name
-    if (options.birth_date) {
-        search.birth_date = getRandomDobString()
-    }
+    search.primary_name = getRandomName()
+    search.birth_date = getRandomDobString()
     if (options.window_size) {
         search.window_size = options.window_size
     } else {search.window_size = defaultOptions.window_size}
