@@ -1,5 +1,6 @@
 import Cors from 'cors'
 import Cookies from 'js-cookie'
+import { deleteItemFromAvailableUrls } from '../../app/elastic-instances/components/UrlList'
 import { getRandomDobString } from './dob-gen'
 import { getRandomName } from './name-gen'
 
@@ -358,12 +359,24 @@ export async function getAvailableElasticUrls(url = false){
  * @param {array} arrayOfHits
  * @returns an array of objects
  */
-async function processHits(arrayOfHits){
-    let urlObjects = []
+export async function processHits(arrayOfHits){
+    let resultsObjects = []
     arrayOfHits.forEach(hit => {
-        urlObjects.push({...hit._source, id: hit._id})
+        resultsObjects.push({...hit._source, id: hit._id})
     })
-    return urlObjects
+    return resultsObjects
+}
+
+/**
+ * This function will take the id of a previous test and delete it from the index
+ * @param {string} id the id of the previous test to delete
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
+ */
+export async function deletePreviousTestById(id){
+    let requestOptions = getPostRequestOptions()
+    const url = Cookies.get('adminElasticUrl')
+    requestOptions.method = 'DELETE'
+    await fetch(`${url}/previous-tests/_doc/${id}`, requestOptions)
 }
 
 /**

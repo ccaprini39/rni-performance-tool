@@ -46,13 +46,13 @@ export default function InstancePage({params}){
     return (
         <div>
             <span>
-                <h1 style={headerStyle}>
-                    {name}
+                <div style={headerStyle}>
+                    <h1>{name}</h1>
                     <h3>Instance Url: {url}</h3>
                     <IconButton size="large" color="success" onClick={toggleValue}>
                         <Refresh />
                     </IconButton>
-                </h1>
+                </div>
             </span>
 
             <OverAllGrid health={health[0]} 
@@ -70,7 +70,7 @@ export default function InstancePage({params}){
                         <br />
                     </span>
                     <span>
-                        <AutoSearchForm url={url} urlName={name} /> 
+                        <AutoSearchForm toggle={toggleValue} url={url} urlName={name} /> 
                     </span>
                     <br />
                     <span>
@@ -259,7 +259,7 @@ export async function multipleBulkIndex(url, number){
     }
 }
 
-function CreateDocsForm({url, toggle}){
+export function CreateDocsForm({url, toggle}){
     //this react component is a form that has an input for the number of documents to create
     //this value will be validated to make sure it is a multiple of 100
     //if it is not a multiple of 100, the submit button will be disabled
@@ -305,7 +305,7 @@ function CreateDocsForm({url, toggle}){
     )
 }
 
-const headerStyle = 
+export const headerStyle = 
 {
     display: 'flex',
     justifyContent: 'space-between',

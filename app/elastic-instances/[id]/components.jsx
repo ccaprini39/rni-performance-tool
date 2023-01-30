@@ -1,5 +1,5 @@
 'use client'
-import { Button, Card, CardContent, CircularProgress, FormControlLabel, FormGroup, Switch, TextField, Typography } from "@mui/material"
+import { Button, Card, CardContent, CircularProgress, FormControlLabel, FormGroup, IconButton, Switch, TextField, Typography } from "@mui/material"
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
 import { AgGridReact, AgGridColumn } from "ag-grid-react"
 import "ag-grid-community/dist/styles/ag-grid.css"
@@ -7,10 +7,13 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css"
 import { useEffect, useState } from "react"
 import { createBulkDocsInIndex, deleteIndex } from "./utils"
 import { generateOneHundredBulkObjects } from "../../../pages/api/flatten-nested-identity"
-import { createIndex, defaultOptions } from "../../../pages/api/create-search-object"
+import { createIndex, defaultOptions, sleep } from "../../../pages/api/create-search-object"
 import { getDateTimeString, multiAutoSearch } from "../../../pages/api/multi-search-and-save"
 import ResultsComparisonChart, { Test } from "../../../pages/shared-components/ResultsComparisonGraph"
 import ModalWrapper from "../../../pages/shared-components/ModalWrapper"
+import { Save } from "@mui/icons-material"
+import { savePreviousTest } from "../../../pages/api/fetch-previous-tests"
+import Cookies from "js-cookie"
 
 export function SimpleCard({title, body, color}){
     if(title === null || title === undefined) title = 'Simple Card'
@@ -279,11 +282,16 @@ export const rniFlatMapping =
  * console.log(indexExists) // true
  */
 export async function checkThatIndexExists(url, indexName){
-    const indexExists = await fetch(url + '/' + indexName, {timeout: 1000})
-    if (indexExists.status === 404) {
+    try {
+        const indexExists = await fetch(url + '/' + indexName, {timeout: 1000})
+        if (indexExists.status === 404) {
+            throw new Error('index does not exist')
+        }
+        return true
+    } catch (error) {
+        console.log(error.message)
         return false
     }
-    return true
 }
 
 /**
@@ -391,12 +399,13 @@ export async function createOneHundredDocs(url){
 }
 
 //This is a function that will have a form with 2 inputs, one for the window size and one for the number of queries to run for each index
-export function AutoSearchForm({ url, urlName }){
+export function AutoSearchForm({ url, urlName, toggle }){
     const [windowSize, setWindowSize] = useState(100)
     const [numQueries, setNumQueries] = useState(10)
     const [description, setDescription] = useState(getDateTimeString('simple'))
     const [results, setResults] = useState(null)
     const [loading, setLoading] = useState(false)
+    const [saving, setSaving] = useState(false)
 
     async function handleSubmit(event){
         event.preventDefault()
@@ -408,9 +417,18 @@ export function AutoSearchForm({ url, urlName }){
             urlName,
             {windowSize : windowSize}
         )
-        console.log(results)    
         setResults(results)
         setLoading(false)
+    }
+
+    async function handleSave(event){
+        event.preventDefault()
+        setSaving(true)
+        const cookie = await Cookies.get('adminElasticUrl')
+        await savePreviousTest(cookie, results)
+        sleep(1000)
+        setSaving(false)
+        toggle()
     }
 
     if(loading){ return <CircularProgress /> }
@@ -442,13 +460,26 @@ export function AutoSearchForm({ url, urlName }){
             </FormGroup>
             {results && //if there are results, make the chart available
                 <ModalWrapper style={{width: '90vw'}}>
-                    <Typography variant="h4">{results.description}</Typography>
+                    <div style={spaceBetweenRow}>
+                        <Typography variant="h4">{results.description}</Typography>
+                        { saving ? <CircularProgress /> :
+                            <IconButton onClick={handleSave}>
+                                <Save />
+                            </IconButton>
+                        }
+                    </div>
                     <ResultsComparisonChart data={results} />
                 </ModalWrapper>
             }
         </>
 
     )
+}
+
+export const spaceBetweenRow = {
+    display : 'flex',
+    flexDirection : 'row',
+    justifyContent : 'space-between',
 }
 
 export function AutoSearchButton({ url, options }){
