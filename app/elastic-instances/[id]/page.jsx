@@ -45,14 +45,14 @@ export default function InstancePage({params}){
     if(loading) return <LoadingComponent />
     return (
         <div>
-            <h1>{name}</h1>
             <span>
-                <h3 style={headerStyle}>
-                    Instance Url: {url}
+                <h1 style={headerStyle}>
+                    {name}
+                    <h3>Instance Url: {url}</h3>
                     <IconButton size="large" color="success" onClick={toggleValue}>
                         <Refresh />
                     </IconButton>
-                </h3>
+                </h1>
             </span>
 
             <OverAllGrid health={health[0]} 
@@ -240,7 +240,7 @@ export async function basicGetRequest(url){
  * @example checkMultipleOfHundred(101) //returns false
  */
 export function checkMultipleOfHundred (number){
-    if(number % 100 === 0){
+    if(number % 100 === 0 && number !== 0){
         return true
     }else{
         return false
@@ -284,21 +284,36 @@ function CreateDocsForm({url, toggle}){
 
     if(running) return <CircularProgress />
     else return (
-        <FormGroup style={formStyle} row>
+        <div style={formStyle}>
             <TextField 
-                label="Number of documents to create" type="number" name="number" id="number" placeholder="number" value={number} onChange={(e) => setNumber(e.target.value)} />
-            <Button variant="contained" color="success" disabled={!valid || running} onClick={handleSubmit}>Create</Button>
-        </FormGroup>
+                label="Number of documents to create" 
+                type="number" name="number" id="number" 
+                placeholder="number" value={number} 
+                onChange={(e) => setNumber(e.target.value)} 
+                helperText="Must be a multiple of 100"
+            />
+            <Button
+                style={{marginBottom: '23px'}}
+                variant="contained" 
+                color="success" 
+                disabled={!valid || running} 
+                onClick={handleSubmit}
+            >
+                Create
+            </Button>
+       </div>
     )
 }
 
 const headerStyle = 
 {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    lineHeight: '60px',
 }
 
 export const formStyle =
 {
+    display: 'flex',
     paddingTop: '10px'
 }

@@ -442,6 +442,7 @@ export function AutoSearchForm({ url, urlName }){
             </FormGroup>
             {results && //if there are results, make the chart available
                 <ModalWrapper style={{width: '90vw'}}>
+                    <Typography variant="h4">{results.description}</Typography>
                     <ResultsComparisonChart data={results} />
                 </ModalWrapper>
             }

@@ -82,7 +82,7 @@ export async function flatQuery(url, object){
             "bool" : {
                 "should" : [
                     {
-                        "match" : {primary_name : primary_name}
+                        "match" : {primary_name : `{"data" : "${primary_name}", "entityType" : "PERSON"}`}
                     },
                     {
                         "match" : {birth_date : birth_date}
@@ -100,7 +100,7 @@ export async function flatQuery(url, object){
                     "function_score" : {
                         "doc_score" : {
                             "fields" : {
-                                "name" : {"query_value" : primary_name},
+                                "primary_name" : {"query_value" : {"data" : primary_name, "entityType" : "PERSON"}},
                                 "dob" : {"query_value" : birth_date}
                             }
                         }
@@ -136,7 +136,7 @@ export async function nestedDobQuery(url, object){
                         }
                     },
                     {
-                        "match" : {primary_name : primary_name}
+                        "match" : {primary_name : `{"data" : "${primary_name}", "entityType" : "PERSON"}`}
                     }
                 ]
             }
@@ -174,7 +174,7 @@ export async function nestedDobQuery(url, object){
                         "function_score" : {
                             "name_score" : {
                                 "field" : "primary_name",
-                                "query_name" : primary_name,
+                                "query_name" : {"data" : primary_name, "entityType" : "PERSON"}
                             }
                         }
                     },
@@ -204,7 +204,7 @@ export async function nestedQuery(url, object){
                             "query" : {
                                 "bool" : {
                                     "should" : {
-                                        "match" : {"aliases.primary_name" : primary_name}
+                                        "match" : {"aliases.primary_name" : `{"data" : "${primary_name}", "entityType" : "PERSON"}`}
                                     }
                                 }
                             }
@@ -240,7 +240,7 @@ export async function nestedQuery(url, object){
                                 "function_score" : {
                                     "name_score" : {
                                         "field" : "aliases.primary_name",
-                                        "query_name" : primary_name
+                                        "query_name" : {"data" : primary_name, "entityType" : "PERSON"}
                                     }
                                 }
                             }

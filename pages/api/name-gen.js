@@ -133,6 +133,20 @@ export function generateArrayOfNames(num, gender){
     let result = []
     for (let i = 0; i < num; i++){
         const name = generateRandomNameGendered(gender)
+        result.push({primary_name : 
+            {
+                "data" : name,
+                "entityType" : "PERSON"
+            }
+        })
+    }
+    return result
+}
+
+export function generateArrayOfNamesWithoutEntityType(num, gender){
+    let result = []
+    for (let i = 0; i < num; i++){
+        const name = generateRandomNameGendered(gender)
         result.push({primary_name : name})
     }
     return result
