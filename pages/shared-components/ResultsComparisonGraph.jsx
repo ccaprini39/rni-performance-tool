@@ -2,6 +2,7 @@
 import { VictoryBar, VictoryLabel } from "victory"
 
 export default function ResultsComparisonChart({ data }){
+    if (!data) return <div></div>
     let chartData = processData(data)
     function getFill(dataPoint){
         return dataPoint.fill

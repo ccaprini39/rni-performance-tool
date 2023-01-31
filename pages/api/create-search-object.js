@@ -168,7 +168,7 @@ export async function nestedDobQuery(url, object){
                 }
             },
             {
-                "window_size" : 10,
+                "window_size" : window_size,
                 "rni_query" : {
                     "rescore_query" : {
                         "function_score" : {

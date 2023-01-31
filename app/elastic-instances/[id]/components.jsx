@@ -414,7 +414,7 @@ export function AutoSearchForm({ url, urlName, toggle }){
             numQueries,
             description,
             urlName,
-            {windowSize : windowSize}
+            {window_size : windowSize}
         )
         setResults(results)
         await sleep(500)
