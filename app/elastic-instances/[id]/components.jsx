@@ -439,7 +439,7 @@ export function AutoSearchForm({ url, urlName, toggle }){
             numQueries,
             description,
             urlName,
-            {windowSize : windowSize}
+            {window_size : windowSize}
         )
         const cookie = await Cookies.get('adminElasticUrl')
         await savePreviousTest(cookie, results)

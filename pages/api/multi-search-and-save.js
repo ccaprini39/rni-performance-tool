@@ -37,7 +37,7 @@ export async function multiAutoSearch(url, number, description, urlName, searchO
     const result = {
         url : url,
         urlName : name,
-        window: searchOptions.windowSize,
+        window: searchOptions.window_size,
         timeExecuted : time,
         description : description,
         nestedIndexCount : nested_index_count,
