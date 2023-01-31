@@ -5,13 +5,13 @@ import "ag-grid-community/dist/styles/ag-grid.css"
 import "ag-grid-community/dist/styles/ag-theme-alpine.css"
 import { useState } from "react"
 import { Button } from "@mui/material"
-import { deletePreviousTestById, sleep } from "../../../../pages/api/create-search-object"
-import ResultsComparisonChart from "../../../../pages/shared-components/ResultsComparisonGraph"
+import { deletePreviousTestById, sleep } from "../../../pages/api/create-search-object"
+import ResultsComparisonChart from "../../../pages/shared-components/ResultsComparisonGraph"
 
 export function PreviousTestsTable({ data, toggle }){
 
     const [selectedResult, setSelectedResult] = useState(data[0])
-    const [chartOpen, setChartOpen] = useState(false)
+    const [chartOpen, setChartOpen] = useState(true)
 
     const defaultColDef = {
         flex: 1,

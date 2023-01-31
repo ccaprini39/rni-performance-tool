@@ -1,13 +1,15 @@
 'use client'
 
 import { Refresh } from "@mui/icons-material"
-import { Button, CircularProgress, FormGroup, FormLabel, IconButton, Input, TextField } from "@mui/material"
+import { Button, CircularProgress, FormGroup, FormLabel, IconButton, Input, TextField, Typography } from "@mui/material"
 import Cookies from "js-cookie"
 import { useEffect, useState } from "react"
 import LoadingComponent from "../../../components/LoadingComponent"
 import { sleep, verifyElasticWithTimeout } from "../../../pages/api/create-search-object"
+import { getPreviousTests } from "../../../pages/api/fetch-previous-tests"
 import { getNonHiddenIndices } from "../../../pages/api/fetch-previous-tests"
-import IndexTable, { AutoSearchForm, checkThatTestingIndicesExist, createOneHundredDocs, CreateOneHundredDocsButton, CreateTestingIndicesButton, DeleteTestingIndicesButton, OverAllGrid, RecreateTestingIndicesButton } from "./components"
+import IndexTable, { AutoSearchForm, checkThatTestingIndicesExist, createOneHundredDocs, CreateTestingIndicesButton, DeleteTestingIndicesButton, OverAllGrid, RecreateTestingIndicesButton } from "./components"
+import { PreviousTestsTable } from "./previous-tests-components"
 
 export default function InstancePage({params}){
 
@@ -21,6 +23,7 @@ export default function InstancePage({params}){
     const [url, setUrl] = useState('')
     const [name, setName] = useState('')
     const [value, setValue] = useState(0)
+    const [tests, setTests] = useState([])
     const [testingIndiciesExist, setTestingIndiciesExist] = useState(false)
     const toggleValue = () => setValue(value === 0 ? 1 : 0)
 
@@ -38,6 +41,8 @@ export default function InstancePage({params}){
             setTestingIndiciesExist(await checkThatTestingIndicesExist(url))
             setUrl(url)
             setName(name)
+            const cookieUrl = await Cookies.get('adminElasticUrl')
+            setTests(await getPreviousTests(cookieUrl, url))
             await sleep(1500)
             setLoading(false)
         }
@@ -85,6 +90,10 @@ export default function InstancePage({params}){
                     <CreateTestingIndicesButton toggle={toggleValue} url={url} />
                 </>
             }
+            <Typography variant="h4">Previous Tests</Typography>
+            <PreviousTestsTable data={tests} toggle={toggleValue} />
+            <br />
+
 
         </div>
     )

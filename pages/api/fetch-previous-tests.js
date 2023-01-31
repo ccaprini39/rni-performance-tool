@@ -2,6 +2,7 @@
 //using async/await syntax
 import Cors from 'cors'
 import { processHits } from "./create-search-object"
+import { getCountOfDocsInIndex } from './multi-search-and-save'
 
 
 function initMiddleware(middleware) {
@@ -148,15 +149,21 @@ export async function savePreviousTest(url, test){
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-get-settings.html
  */
 export async function getNonHiddenIndices(url){
-    console.log(url)
     try {
         const res = await fetch(`${url}/_cat/indices?format=json`, {
             method: 'GET'
         })
         const data = await res.json()
-        console.log('after')
-        console.log(data)
-        return data
+        let copyWithCount = []
+        for await (const index of data) {
+            if(index.index.startsWith('.')) {
+                copyWithCount.push({ ...index, count: 0 })
+            } else {
+                const count = await getCountOfDocsInIndex(url, index.index)
+                copyWithCount.push({ ...index, count })
+            }
+        }
+        return copyWithCount
     } catch (error) {
         return false
     }

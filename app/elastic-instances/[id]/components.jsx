@@ -130,11 +130,10 @@ export default function IndexTable({ indices, id }) {
                 suppressFieldDotNotation={true}
             >
                 <AgGridColumn field="index" cellRenderer={(params) => <IndexLinkComponent id={id} value={params.value} />}></AgGridColumn>
-                <AgGridColumn field="pri.store.size"></AgGridColumn>
                 <AgGridColumn field="count"></AgGridColumn>
                 <AgGridColumn headerName="Total Docs" field="docs.count"></AgGridColumn>
                 <AgGridColumn field="docs.deleted"></AgGridColumn>
-                <AgGridColumn field="store.size"></AgGridColumn>
+                <AgGridColumn field="store.size" headerName="Storage Size"></AgGridColumn>
             </AgGridReact>
         </div>
     )
