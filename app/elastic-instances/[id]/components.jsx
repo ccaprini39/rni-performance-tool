@@ -12,7 +12,7 @@ import { getDateTimeString, multiAutoSearch } from "../../../pages/api/multi-sea
 import ResultsComparisonChart, { Test } from "../../../pages/shared-components/ResultsComparisonGraph"
 import ModalWrapper from "../../../pages/shared-components/ModalWrapper"
 import { Save } from "@mui/icons-material"
-import { savePreviousTest } from "../../../pages/api/fetch-previous-tests"
+import { filterHiddenIndices, savePreviousTest } from "../../../pages/api/fetch-previous-tests"
 import Cookies from "js-cookie"
 
 export function SimpleCard({title, body, color}){
@@ -99,7 +99,7 @@ export default function IndexTable({ indices, id }) {
 
     useEffect(() => {
         if (hiddenStatus) {
-            setCurrentIndices(indices.filter((index) => index.index[0] !== '.'))
+            setCurrentIndices(filterHiddenIndices(indices))
         }
         else {
             setCurrentIndices(indices)
@@ -407,7 +407,7 @@ export function AutoSearchForm({ url, urlName, toggle }){
     const [loading, setLoading] = useState(false)
     const [saving, setSaving] = useState(false)
 
-    async function handleSubmit(event){
+    async function handleView(event){
         event.preventDefault()
         setLoading(true)
         const results = await multiAutoSearch(
@@ -418,6 +418,7 @@ export function AutoSearchForm({ url, urlName, toggle }){
             {windowSize : windowSize}
         )
         setResults(results)
+        await sleep(500)
         setLoading(false)
     }
 
@@ -426,10 +427,29 @@ export function AutoSearchForm({ url, urlName, toggle }){
         setSaving(true)
         const cookie = await Cookies.get('adminElasticUrl')
         await savePreviousTest(cookie, results)
-        sleep(1000)
+        await sleep(1000)
         setSaving(false)
         toggle()
     }
+
+    async function handleSearchAndSave(event){
+        event.preventDefault()
+        setLoading(true)
+        const results = await multiAutoSearch(
+            url, 
+            numQueries,
+            description,
+            urlName,
+            {windowSize : windowSize}
+        )
+        const cookie = await Cookies.get('adminElasticUrl')
+        await savePreviousTest(cookie, results)
+        await sleep(1000)
+        setLoading(false)
+        toggle()
+    }
+
+
 
     if(loading){ return <CircularProgress /> }
     else return (
@@ -456,7 +476,8 @@ export function AutoSearchForm({ url, urlName, toggle }){
                     value={description}
                     onChange={(event) => setDescription(event.target.value)}
                 />
-                <Button variant="contained" color="success" onClick={handleSubmit}>Auto Search</Button>
+                <Button variant='contained' color="info" onClick={handleView}>Test and View</Button>
+                <Button variant="contained" color="success" onClick={handleSearchAndSave}>Test and Save</Button>
             </FormGroup>
             {results && //if there are results, make the chart available
                 <ModalWrapper style={{width: '90vw'}}>

@@ -6,7 +6,7 @@ import Cookies from "js-cookie"
 import { useEffect, useState } from "react"
 import LoadingComponent from "../../../components/LoadingComponent"
 import { sleep, verifyElasticWithTimeout } from "../../../pages/api/create-search-object"
-import { getCountOfDocsInIndex } from "../../../pages/api/multi-search-and-save"
+import { getNonHiddenIndices } from "../../../pages/api/fetch-previous-tests"
 import IndexTable, { AutoSearchForm, checkThatTestingIndicesExist, createOneHundredDocs, CreateOneHundredDocsButton, CreateTestingIndicesButton, DeleteTestingIndicesButton, OverAllGrid, RecreateTestingIndicesButton } from "./components"
 
 export default function InstancePage({params}){
@@ -30,7 +30,9 @@ export default function InstancePage({params}){
             const {url, name} = await getAvailableUrlById(params.id)
             setHealth(await getElasticInstanceHealth(url))
             setPlugins(await getElasticPlugins(url))
-            setIndices(await getNonHiddenIndices(url))
+            const indicies = await getNonHiddenIndices(url)
+            console.log(indicies)
+            setIndices(indicies)
             setNodeStats(await getElasticNodesStats(url))
             setClusterStats(await getElasticClusterStats(url))
             setTestingIndiciesExist(await checkThatTestingIndicesExist(url))
@@ -149,32 +151,6 @@ export async function getElasticPlugins(url) {
         })
         const data = await res.json()
         return data
-    } catch (error) {
-        return false
-    }
-}
-
-/**
- * Gets the list of non hidden indices from the elastic instance.  
- * Hidden indices start with a '.', so this function filters out those indices
- * @param {string} url 
- * @returns all of the non hidden indices if successful, false if not
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-get-settings.html
- */
-export async function getNonHiddenIndices(url){
-    try {
-        const res = await fetch(`${url}/_cat/indices?format=json`, {
-            method: 'GET'
-        })
-        const data = await res.json()
-        const copy = []
-        for await (const element of data) {
-            if(!element.index.startsWith('.')){
-                const realCount = await getCountOfDocsInIndex(url, element.index)
-                copy.push({...element, count : realCount })
-            }
-        }
-        return copy
     } catch (error) {
         return false
     }

@@ -1,8 +1,72 @@
 //this file will hold crud operations for previous tests index in the elasticsearch instance
 //using async/await syntax
-
-import { checkThatIndexExists } from "../../app/elastic-instances/[id]/components"
+import Cors from 'cors'
 import { processHits } from "./create-search-object"
+
+
+function initMiddleware(middleware) {
+    return (req, res) =>
+        new Promise((resolve, reject) => {
+        middleware(req, res, (result) => {
+            if (result instanceof Error) {
+            return reject(result)
+            }
+            return resolve(result)
+        })
+    })
+}
+
+// Initialize the cors middleware
+const cors = initMiddleware(
+    // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
+    Cors({
+        // Only allow requests with GET, POST and OPTIONS
+        methods: ['GET', 'POST', 'OPTIONS'],
+    })
+)
+
+
+/**
+* Function that checks if an index exists in the elasticsearch instance
+* @param {obj} req the request object
+* @param {obj} res the response object
+* @returns a JSON object with the value of the previous tests
+* @example { previous_tests : [{...}, {...}, {...}] }
+* @swagger
+* /api/fetch-previous-tests:
+*   post:
+*     description: Returns an array of previous tests
+*     requestBody:
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               adminUrl:
+*                 type: string
+*                 description: the url of the elasticsearch instance where the admin data is stored
+*     responses:
+*       200:
+*         description: returns an array of previous tests
+*/
+export default async function handler(req, res) {
+    await cors(req, res)
+    const { body, method } = req
+    if (method === 'POST') {
+        const { adminUrl } = body
+        if (!adminUrl) {
+            res.status(400).json({ error: 'Missing adminUrl' })
+            return
+        }
+        const previousTests = await getPreviousTests(adminUrl, 'all')
+        if (previousTests.length === 0) res.status(200).json({ value : 'No previous tests stored at this url' })
+        else res.status(200).json({ previous_tests : previousTests })
+
+    } else {
+        res.status(200).json({ value: 'Please make POST requst with the admin url (adminUrl) to retrieve previous tests' })
+    }
+}
+
 
 /**
  * Function that gets all the documents from the previous-tests index
@@ -16,7 +80,7 @@ import { processHits } from "./create-search-object"
  * //returns an array of all the documents in the previous-tests index
  */
 export async function getPreviousTests(adminUrl, instanceUrl = 'all'){
-    const indexExists = await checkThatIndexExists(adminUrl, 'previous-tests')
+    const indexExists = await checkThatIndexExistsLocal(adminUrl, 'previous-tests')
     if(!indexExists) return []
     let results = await getAllDocsFromEsIndex(adminUrl, 'previous-tests')
     //now filter the results by which match the instanceUrl
@@ -43,16 +107,8 @@ export async function getAllDocsFromEsIndex(url, index){
     })
     let data = await res.json()
     data = data.hits.hits
-    data = await processDocsFromHits(data)
+    data = await processHits(data)
     return data
-}
-
-export async function processDocsFromHits(arrayOfHits){
-    let urlObjects = []
-    arrayOfHits.forEach(hit => {
-        urlObjects.push({...hit._source, id: hit._id})
-    })
-    return urlObjects
 }
 
 /**
@@ -83,4 +139,44 @@ export async function savePreviousTest(url, test){
     }
     return false
 }
+
+/**
+ * Gets the list of non hidden indices from the elastic instance.  
+ * Hidden indices start with a '.', so this function filters out those indices
+ * @param {string} url 
+ * @returns all of the non hidden indices if successful, false if not
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-get-settings.html
+ */
+export async function getNonHiddenIndices(url){
+    console.log(url)
+    try {
+        const res = await fetch(`${url}/_cat/indices?format=json`, {
+            method: 'GET'
+        })
+        const data = await res.json()
+        console.log('after')
+        console.log(data)
+        return data
+    } catch (error) {
+        return false
+    }
+}
+
+export function filterHiddenIndices(arrayOfIndices){
+    let copy = [...arrayOfIndices]
+    copy = copy.filter(index => !index.index.startsWith('.'))
+    return copy
+}
+
+async function checkThatIndexExistsLocal(url, index){
+    const res = await fetch(`${url}/_cat/indices/${index}?format=json`, {
+        method: 'GET'
+    })
+    const data = await res.json()
+    if(data.length === 0){
+        return false
+    }
+    return true
+}
+
 

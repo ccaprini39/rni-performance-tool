@@ -13,6 +13,7 @@ import { createSearchObject, multiQuery } from "./create-search-object"
  */
 export async function multiAutoSearch(url, number, description, urlName, searchOptions){
     //warmup function: executes 5 iterations of the search to warm up the cache
+
     for await (const _ of Array(5).keys()){
         const randomSearch = await createSearchObject(searchOptions)
         await multiQuery(url, randomSearch)
@@ -36,6 +37,7 @@ export async function multiAutoSearch(url, number, description, urlName, searchO
     const result = {
         url : url,
         urlName : name,
+        window: searchOptions.windowSize,
         timeExecuted : time,
         description : description,
         nestedIndexCount : nested_index_count,

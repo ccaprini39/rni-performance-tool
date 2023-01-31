@@ -6,14 +6,12 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css"
 import { useState } from "react"
 import { Button } from "@mui/material"
 import { deletePreviousTestById, sleep } from "../../../../pages/api/create-search-object"
-import ModalWrapper from "../../../../pages/shared-components/ModalWrapper"
 import ResultsComparisonChart from "../../../../pages/shared-components/ResultsComparisonGraph"
 
 export function PreviousTestsTable({ data, toggle }){
 
     const [selectedResult, setSelectedResult] = useState(data[0])
     const [chartOpen, setChartOpen] = useState(false)
-
 
     const defaultColDef = {
         flex: 1,
@@ -31,7 +29,7 @@ export function PreviousTestsTable({ data, toggle }){
     function DeleteButton({id}){
         async function handleDelete(){
             await deletePreviousTestById(id)
-            sleep(1000)
+            await sleep(1000)
             toggle()
         }
         return (
@@ -49,7 +47,6 @@ export function PreviousTestsTable({ data, toggle }){
                 defaultColDef={defaultColDef}
                 suppressFieldDotNotation={true}
             >
-                <AgGridColumn field="timeExecuted" headerName="Timestamp" flex={2}/>
                 <AgGridColumn field="description" headerName="Description" flex={2} />
                 <AgGridColumn field="nestedIndexCount" headerName="Nested Docs" />
                 <AgGridColumn field="nestedDobsIndexCount" headerName="Nested Dob Docs" />
@@ -57,6 +54,8 @@ export function PreviousTestsTable({ data, toggle }){
                 <AgGridColumn field="nested_avg" headerName="Nested Avg (ms)" flex={2} />
                 <AgGridColumn field="nested_dobs_avg" headerName="Nested Dob Avg (ms)" flex={2} />
                 <AgGridColumn field="flat_avg" headerName="Flat Avg (ms)" flex={2} />
+                <AgGridColumn field="window" headerName="Window Size" flex={2} />
+                <AgGridColumn field="numberOfQueries" headerName="Number of Queries" flex={2} />
                 <AgGridColumn field='id' headerName='Delete' flex={1} cellRenderer={(params) => <DeleteButton id={params.value} /> } />
             </AgGridReact>
             {chartOpen && <ResultsComparisonChart data={selectedResult} />}

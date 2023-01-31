@@ -1,6 +1,5 @@
 import Cors from 'cors'
 import Cookies from 'js-cookie'
-import { deleteItemFromAvailableUrls } from '../../app/elastic-instances/components/UrlList'
 import { getRandomDobString } from './dob-gen'
 import { getRandomName } from './name-gen'
 

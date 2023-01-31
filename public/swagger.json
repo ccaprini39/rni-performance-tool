@@ -45,6 +45,31 @@
         }
       }
     },
+    "/api/fetch-previous-tests": {
+      "post": {
+        "description": "Returns an array of previous tests",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "adminUrl": {
+                    "type": "string",
+                    "description": "the url of the elasticsearch instance where the admin data is stored"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "returns an array of previous tests"
+          }
+        }
+      }
+    },
     "/api/flatten-nested-identity": {
       "get": {
         "description": "Returns a nested identity and the flattened identities",
