@@ -131,7 +131,7 @@ export default function IndexTable({ indices, id }) {
             >
                 <AgGridColumn field="index" cellRenderer={(params) => <IndexLinkComponent id={id} value={params.value} />}></AgGridColumn>
                 <AgGridColumn field="count"></AgGridColumn>
-                <AgGridColumn headerName="Total Docs" field="docs.count"></AgGridColumn>
+                <AgGridColumn headerName="Internal Docs" field="docs.count"></AgGridColumn>
                 <AgGridColumn field="docs.deleted"></AgGridColumn>
                 <AgGridColumn field="store.size" headerName="Storage Size"></AgGridColumn>
             </AgGridReact>

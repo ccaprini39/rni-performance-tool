@@ -34,7 +34,6 @@ export default function InstancePage({params}){
             setHealth(await getElasticInstanceHealth(url))
             setPlugins(await getElasticPlugins(url))
             const indicies = await getNonHiddenIndices(url)
-            console.log(indicies)
             setIndices(indicies)
             setNodeStats(await getElasticNodesStats(url))
             setClusterStats(await getElasticClusterStats(url))
