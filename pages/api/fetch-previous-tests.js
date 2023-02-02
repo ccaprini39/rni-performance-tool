@@ -81,6 +81,20 @@ export default async function handler(req, res) {
  * //returns an array of all the documents in the previous-tests index
  */
 export async function getPreviousTests(adminUrl, instanceUrl = 'all'){
+    try {
+        const indexExists = await checkThatIndexExistsLocal(adminUrl, 'previous-tests')
+        if(!indexExists) {
+            await createIndex(adminUrl, 'previous-tests')
+        }
+        let results = await getAllDocsFromEsIndex(adminUrl, 'previous-tests')
+        //now filter the results by which match the instanceUrl
+        if(instanceUrl !== 'all'){
+            results = results.filter(doc => doc.url === instanceUrl)
+        }
+        return results
+    } catch (error) {
+        
+    }
     const indexExists = await checkThatIndexExistsLocal(adminUrl, 'previous-tests')
     if(!indexExists) return []
     let results = await getAllDocsFromEsIndex(adminUrl, 'previous-tests')
@@ -103,13 +117,19 @@ export async function getPreviousTests(adminUrl, instanceUrl = 'all'){
  * //returns an array of all the documents in the previous-tests index
  */
 export async function getAllDocsFromEsIndex(url, index){
-    const res = await fetch(`${url}/${index}/_search?format=json`, {
-        method: 'GET',
-    })
-    let data = await res.json()
-    data = data.hits.hits
-    data = await processHits(data)
-    return data
+    try {
+        const indexExists = await checkThatIndexExistsLocal(adminUrl, 'previous-tests')
+        if(!indexExists) return []
+        const res = await fetch(`${url}/${index}/_search?format=json`, {
+            method: 'GET',
+        })
+        let data = await res.json()
+        data = data.hits.hits
+        data = await processHits(data)
+        return data
+    } catch (error) {
+        return []
+    }
 }
 
 /**
