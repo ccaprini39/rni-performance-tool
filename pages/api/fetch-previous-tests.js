@@ -110,15 +110,17 @@ export async function getPreviousTests(adminUrl, instanceUrl = 'all'){
  */
 export async function getAllDocsFromEsIndex(url, index){
     try {
-        const indexExists = await checkThatIndexExistsLocal(adminUrl, 'previous-tests')
+        const indexExists = await checkThatIndexExistsLocal(url, 'previous-tests')
         if(!indexExists) return []
-        const res = await fetch(`${url}/${index}/_search?format=json`, {
-            method: 'GET',
-        })
-        let data = await res.json()
-        data = data.hits.hits
-        data = await processHits(data)
-        return data
+        else {
+                const res = await fetch(`${url}/${index}/_search?format=json`, {
+                method: 'GET',
+            })
+            let data = await res.json()
+            data = data.hits.hits
+            data = await processHits(data)
+            return data
+        }
     } catch (error) {
         return []
     }
