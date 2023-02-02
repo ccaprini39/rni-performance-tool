@@ -93,16 +93,8 @@ export async function getPreviousTests(adminUrl, instanceUrl = 'all'){
         }
         return results
     } catch (error) {
-        
+        return []
     }
-    const indexExists = await checkThatIndexExistsLocal(adminUrl, 'previous-tests')
-    if(!indexExists) return []
-    let results = await getAllDocsFromEsIndex(adminUrl, 'previous-tests')
-    //now filter the results by which match the instanceUrl
-    if(instanceUrl !== 'all'){
-        results = results.filter(doc => doc.url === instanceUrl)
-    }
-    return results
 }
 
 /**
