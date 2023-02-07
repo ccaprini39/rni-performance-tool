@@ -271,7 +271,7 @@ export function createBulkElasticStringOfNames(arrayOfNames){
 }
 
 export async function indexLeonard(url){
-    const bulkString = createBulkElasticStringOfNames(Leonard)
+    const bulkString = createBulkElasticStringOfNames(arrayOfCohenNames)
     const response = await createBulkDocsInIndex(url, bulkString)
     return response
 }
@@ -283,7 +283,7 @@ export async function queryLeonard(url, window_size){
             "bool" : {
                 "should" : [
                     {
-                        "match" : {primary_name : `{"data" : "${primary_name}", "entityType" : "PERSON"}`}
+                        "match" : {primary_name : `{"data" : "Leonard Norman Cohen}", "entityType" : "PERSON"}`}
                     }
                 ]
             }
@@ -298,7 +298,7 @@ export async function queryLeonard(url, window_size){
                     "function_score" : {
                         "doc_score" : {
                             "fields" : {
-                                "primary_name" : {"query_value" : {"data" : primary_name, "entityType" : "PERSON"}}
+                                "primary_name" : {"query_value" : {"data" : "Leonard Norman Cohen", "entityType" : "PERSON"}}
                             }
                         }
                     }

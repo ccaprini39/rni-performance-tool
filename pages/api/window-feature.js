@@ -1,5 +1,6 @@
 import { deleteIndex } from "../../app/elastic-instances/[id]/utils"
 import { createIndex } from "./create-search-object"
+import { checkThatIndexExistsLocal } from "./fetch-previous-tests"
 
 export async function createWindowSizeIndex(url){
     const indexExists = await checkThatIndexExistsLocal(url, 'window-size')
@@ -9,12 +10,14 @@ export async function createWindowSizeIndex(url){
 }
 
 export const windowFeatureMapping = {
-    "properties": {
-        "primary_name": {
-            "type": "rni_name",
-        },
-        "similarity": {
-            "type": "float"
+    "mappings": {
+        "properties": {
+            "primary_name": {
+                "type": "rni_name",
+            },
+            "similarity": {
+                "type": "float"
+            }
         }
     }
 }

@@ -189,15 +189,20 @@ export function filterHiddenIndices(arrayOfIndices){
     return copy
 }
 
-async function checkThatIndexExistsLocal(url, index){
-    const res = await fetch(`${url}/_cat/indices/${index}?format=json`, {
-        method: 'GET'
-    })
-    const data = await res.json()
-    if(data.length === 0){
+export async function checkThatIndexExistsLocal(url, index){
+    try {
+        const res = await fetch(`${url}/_cat/indices/${index}?format=json`, {
+            method: 'GET'
+        })
+        if(res.status === 404) throw new Error('Index does not exist')
+        const data = await res.json()
+        if(data.length === 0){
+            return false
+        }
+        return true
+    } catch (error) {
         return false
     }
-    return true
 }
 
 
