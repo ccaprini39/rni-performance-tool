@@ -309,6 +309,6 @@ export async function queryLeonard(url, window_size){
         }
     }
     const query = {...rniQuery, ...rescorer}
-    let response = await executeQuery(url, 'window-size', query)
+    let response = await executeQuery(url, 'window-test', query)
     return response
 }
