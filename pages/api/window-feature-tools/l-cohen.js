@@ -261,9 +261,9 @@ export const arrayOfCohenNames =
 export function createBulkElasticStringOfNames(arrayOfNames){
     let bulkString = ''
     arrayOfNames.forEach((name) => {
-        bulkString += JSON.stringify({ index: { _index: 'window-test', _type: 'names', _id: name.index } }) + '\n';
+        bulkString += JSON.stringify({ index: { _index: 'window-test', _id: name.id } }) + '\n';
         bulkString += JSON.stringify({ primary_name: {
-            "data" : name,
+            "data" : name.primary_name,
             "entityType" : "PERSON"
         }, similarity: name.similarity }) + '\n'
     })

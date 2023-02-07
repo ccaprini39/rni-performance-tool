@@ -19,7 +19,7 @@ export default function WindowFeaturePage(){
         await createWindowSizeIndex(url.url)
         await indexLeonard(url.url)
         await sleep(2000)
-        const result = await queryLeonard(url.url)
+        const result = await queryLeonard(url.url, 5)
         setResponse(result)
         setLoading(false)
     }
