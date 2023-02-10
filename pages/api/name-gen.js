@@ -59,7 +59,7 @@ const arrayOfCommonMaleNames = [
     "Charlie", "Tyler", "Gilbert", "Gene", "Marc", "Reginald", "Ruben", "Brett", "Angel", "Nathan", "Milton",
     "Joel", "Dylan", "Javier", "Erick", "Stewart", "Doyle", "Darren", "Tyson", "Eli", "Damon", "Moses",
     "Donnie", "Tracy", "Trent", "Rudy", "Wade", "Stuart", "Harry", "Lane", "Jeffery", "Felix", "Branden",
-    "Ely", "Kent", "Darian", "Owen", "Jimmie", "Norman", "Malcolm", "Elijah", "Marcus", "Rene", "Bradford",
+    "Ely", "Kent", "Darian", "Owen", "Jimmie", "Malcolm", "Elijah", "Marcus", "Rene", "Bradford",
     "Jamaal", "Trevor", "Oliver", "Saul", "Benny", "Julian", "Winston", "Ernie", "Curt", "Quentin", "Ty"
 ]
   

@@ -1,5 +1,5 @@
 import { createBulkDocsInIndex } from "../../../app/elastic-instances/[id]/utils";
-import { executeQuery, sleep } from "../create-search-object";
+import { executeQuery, processHits, sleep } from "../create-search-object";
 import { generateRandomNameGendered, getRandomGender } from "../name-gen";
 import { createWindowSizeIndex } from "../window-feature";
 
@@ -327,12 +327,56 @@ export async function queryLeonard(url, window_size){
 }
 
 export async function executeBigLeonard({url}){
-  await createWindowSizeIndex(url)
-  await sleep(500)
-  await createBigLeonardSet(url)
-  await sleep(500)
-  const response = await queryLeonard(url, 100)
-  return response
+  await clearAllElasticCache(url)
+  // await createWindowSizeIndex(url)
+  // await sleep(500)
+  // await createBigLeonardSet(url)
+  // await sleep(500)
+  const queryResults = await queryLeonard(url, 100)
+  const resultsInfo = await getResultsInfo(queryResults, 100)
+  await clearAllElasticCache(url)
+
+  const queryResults2 = await queryLeonard(url, 200)
+  const resultsInfo2 = await getResultsInfo(queryResults2, 200)  
+  await clearAllElasticCache(url)
+
+  const queryResults3 = await queryLeonard(url, 300)
+  const resultsInfo3 = await getResultsInfo(queryResults3, 300)
+  await clearAllElasticCache(url)
+
+  const queryResults4 = await queryLeonard(url, 400)
+  const resultsInfo4 = await getResultsInfo(queryResults4, 400)
+  await clearAllElasticCache(url)
+
+  const queryResults5 = await queryLeonard(url, 500)
+  const resultsInfo5 = await getResultsInfo(queryResults5, 500)
+  await clearAllElasticCache(url)
+
+  const queryResults6 = await queryLeonard(url, 600)
+  const resultsInfo6 = await getResultsInfo(queryResults6, 600)
+  await clearAllElasticCache(url)
+
+  const queryResults7 = await queryLeonard(url, 700)
+  const resultsInfo7 = await getResultsInfo(queryResults7, 700)
+  await clearAllElasticCache(url)
+
+  const queryResults8 = await queryLeonard(url, 800)
+  const resultsInfo8 = await getResultsInfo(queryResults8, 800)
+  await clearAllElasticCache(url)
+
+  const queryResults9 = await queryLeonard(url, 900)
+  const resultsInfo9 = await getResultsInfo(queryResults9, 900)
+  await clearAllElasticCache(url)
+
+  const queryResults10 = await queryLeonard(url, 1000)
+  const resultsInfo10 = await getResultsInfo(queryResults10, 1000)
+  await clearAllElasticCache(url)
+
+
+  return [
+    resultsInfo, resultsInfo2, resultsInfo3, resultsInfo4, 
+    resultsInfo5, resultsInfo6, resultsInfo7, resultsInfo8, 
+    resultsInfo9, resultsInfo10]
 }
 
 /**
@@ -351,8 +395,8 @@ export async function createBigLeonardSet(url){
 }
 
 export async function index40000RandomNames(url){
-  for await (const _ of Array(40).keys()){
-    await indexRandom1000Names(url)
+  for await (const _ of Array(20).keys()){
+    await indexRandom2000Names(url)
     await sleep(10)
   }
   return true
@@ -371,10 +415,12 @@ export async function indexRandom500Names(url){
     return response
 }
 
-export async function indexRandom1000Names(url){
+export async function indexRandom2000Names(url){
   const randomBulkNames1 = await generate500RandomBulkNames()
   const randomBulkNames2 = await generate500RandomBulkNames()
-  const randomBulkNames = randomBulkNames1 + randomBulkNames2
+  const randomBulkNames3 = await generate500RandomBulkNames()
+  const randomBulkNames4 = await generate500RandomBulkNames()
+  const randomBulkNames = randomBulkNames1 + randomBulkNames2 + randomBulkNames3 + randomBulkNames4
   const response = await createBulkDocsInIndex(url, randomBulkNames)
   return response
 }
@@ -530,13 +576,54 @@ export async function generateRandomName(){
  * @param {object} response the response object from an es query response
  * @returns {object} an object containing the results information and the false positive and false negative rates
  */
-export function getResultsInfo(response){
-  const results = response.hits.hits
-  const resultsInfo = {
-    total: response.hits.total.value,
-    max_score: response.hits.max_score,
-    results: results
+export async function getResultsInfo(response, windowSize){
+  let results = response.hits.hits
+  results = await processQueryHits(results)
+  let resultsNames = resultsToArrayOfNames(results)
+
+  let resultsInfo = {
+    falseNegatives: 0,
+    truePositives: 0,
+    window_size: windowSize,
   }
+  resultsNames.forEach((name, index) => {
+    if(leonardPositiveNames.includes(name)){
+      resultsInfo.truePositives++
+    } else {
+      resultsInfo.falseNegatives++
+    }
+  })
+
+  return resultsInfo
 }
 
 
+const leonardPositiveNames = leonardPositives.map(primary_name => primary_name.primary_name)
+function resultsToArrayOfNames(results){
+  return results.map(result => result.primary_name)
+}
+
+export async function clearAllElasticCache(url){
+  const postRequestOption = {
+    method: 'POST',
+  }
+  try {
+    const response = await fetch(url + '/_cache/clear', postRequestOption)
+    return true
+  } catch (error) {
+    return false
+  }
+}
+
+/**
+ * This function will take the array of hits from the elastic search response and return an array of objects
+ * @param {array} arrayOfHits
+ * @returns an array of objects
+ */
+export async function processQueryHits(arrayOfHits){
+  let resultsObjects = []
+  arrayOfHits.forEach(hit => {
+      resultsObjects.push({primary_name: hit._source.primary_name.data , id: hit._id, score: hit._score})
+  })
+  return resultsObjects
+}

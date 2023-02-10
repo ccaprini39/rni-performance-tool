@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import { VictoryLine, VictoryChart } from "victory"
 import { executeBigLeonard, indexLeonard, queryLeonard } from "../../pages/api/window-feature-tools/l-cohen"
 import { createWindowSizeIndex, getIndexInfo, indexInfoDefault } from "../../pages/api/window-feature"
 import AvailableUrlsDropdown from "../../components/AvailableUrlsDropdown"
@@ -43,13 +44,41 @@ export default function WindowFeaturePage(){
                     color="primary"
                     onClick={handleCreateLeonard}
                 >
-                    Create Leonard
+                    Run Tests
                 </Button>
             </FormGroup>
             <IndexInfo indexInfo={indexInfo} />
+            <GraphOfResults data={response} />
             <pre>
                 {JSON.stringify(response, null, 2)}
             </pre>
+        </div>
+    )
+}
+
+function GraphOfResults({data}){
+
+    if(!data) return <></>
+    //data will be {windowSize: num, falseNegatives: num}
+    //this needs converted to {x: num, y: num}
+    const graphData = data.map((item) => {
+        return {x: item.windowSize, y: item.falseNegatives}
+    })
+
+    return (
+        <div style={{width: '90%', height:'100%', margin: 'auto'}}>
+            <VictoryChart
+                domain= {{x: [0, 10], y: [0, 20]}}
+            >
+                <VictoryLine 
+                    style={{
+                        data: { stroke: "#c43a31" },
+                        parent: { border: "1px solid #ccc"}
+                    }}
+                    data={graphData}
+                />
+            </VictoryChart>
+            
         </div>
     )
 }
