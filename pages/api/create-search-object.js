@@ -46,7 +46,6 @@ export default async function handler(req, res) {
 export async function autoSearch(url, options){
     const search = createSearchObject(options)
     const results = await searchForDocs(url, search)
-    console.log(results)
 }
 
 //creates a search object based on the options

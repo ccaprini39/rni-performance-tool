@@ -42,7 +42,7 @@ export async function getMappingForIndex(url, index) {
 export async function createBulkDocsInIndex(url, docsString){
     let requestOptions = getPostRequestOptionsStringBody(docsString)
     let response = await fetch(`${url}/_bulk?format=json`, requestOptions)
-    return response.ok
+    return response.status
 }
 
 

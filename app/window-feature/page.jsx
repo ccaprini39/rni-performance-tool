@@ -1,36 +1,35 @@
 'use client'
 
 import { useState } from "react"
-import { indexLeonard, queryLeonard } from "../../pages/api/window-feature-tools/l-cohen"
-import { createWindowSizeIndex } from "../../pages/api/window-feature"
+import { executeBigLeonard, indexLeonard, queryLeonard } from "../../pages/api/window-feature-tools/l-cohen"
+import { createWindowSizeIndex, getIndexInfo, indexInfoDefault } from "../../pages/api/window-feature"
 import AvailableUrlsDropdown from "../../components/AvailableUrlsDropdown"
 import { Button, CircularProgress, FormGroup } from "@mui/material"
 import { useEffect } from "react"
 import { sleep } from "../../pages/api/create-search-object"
+import { IndexInfo } from "../../pages/api/window-feature-tools/components"
 
 export default function WindowFeaturePage(){
 
     const [response, setResponse] = useState(null)
     const [url, setUrl] = useState('')
     const [loading, setLoading] = useState(false)
+    const [indexInfo, setIndexInfo] = useState(indexInfoDefault)
+
 
     async function handleCreateLeonard(){
         setLoading(true)
-        await createWindowSizeIndex(url.url)
-        await indexLeonard(url.url)
-        await sleep(2000)
-        const result = await queryLeonard(url.url, 5)
+        const result = await executeBigLeonard(url)
         setResponse(result)
         setLoading(false)
     }
 
     useEffect(() => {
-        async function load(){
-            setLoading(true)
-            console.log(url)
-            setLoading(false)
+        async function loadIndexInfo(){
+            const result = await getIndexInfo(url.url, 'window-test')
+            setIndexInfo(result)
         }
-        load()
+        url.url && loadIndexInfo()
     },[url])
 
     if(loading) return <CircularProgress />
@@ -47,6 +46,7 @@ export default function WindowFeaturePage(){
                     Create Leonard
                 </Button>
             </FormGroup>
+            <IndexInfo indexInfo={indexInfo} />
             <pre>
                 {JSON.stringify(response, null, 2)}
             </pre>

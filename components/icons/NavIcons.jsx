@@ -1,7 +1,7 @@
 export function ElasticIcon() {
     return (
         <svg
-            width="50px"
+            width="45px"
             aria-label="elastic"
             viewBox="0 0 512 512"
         >
@@ -19,7 +19,7 @@ export function ApiIcon() {
     return (
         <svg
             aria-label="api"
-            width="50px"
+            width="45px"
             viewBox="0 0 256 256"
             fill="#000000"
         >
@@ -38,7 +38,7 @@ export function ApiIcon() {
 
 export default function WindowFeatureIcon() {
     return (
-        <svg height="50px" viewBox="0 0 24 24" width="50px">
+        <svg height="45px" viewBox="0 0 24 24" width="45px">
             <g>
                 <path d="M0,0h24v24H0V0z" fill="none" />
             </g>
