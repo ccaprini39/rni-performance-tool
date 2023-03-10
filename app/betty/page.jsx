@@ -7,10 +7,26 @@ async function getInternalDocs(url, index){
     let hits = ''
     let innerHits = []
     if(index === 'betty-nested'){
-        query = nestedInnerHits
+        query = nestedDobsInnerHits
         const response = await executeQuery(url, index, query)
         hits = response.hits.hits
-        innerHits = response.hits.hits
+        innerHits = []
+        let innerHitsHolder = hits.map(hit => hit.inner_hits.birth_dates.hits.hits)
+        innerHitsHolder.forEach(innerHit => {
+            innerHit.forEach(item => {
+                innerHits.push(item)
+            })
+        })
+        const newQuery = nestedAliasesInnerHits
+        const newResponse = await executeQuery(url, index, newQuery)
+        const newHits = newResponse.hits.hits
+        let newInnerHitsHolder = newHits.map(hit => hit.inner_hits.aliases.hits.hits)
+        newInnerHitsHolder.forEach(innerHit => {
+            innerHit.forEach(item => {
+                innerHits.push(item)
+            })
+        })
+
     } else if(index === 'betty-nested-dobs'){
         query = nestedDobsInnerHits
         const response = await executeQuery(url, index, query)
@@ -22,9 +38,11 @@ async function getInternalDocs(url, index){
                 innerHits.push(item)
             })
         })
-    } else {
-        return []
+    } else if(index === 'betty-flat'){
         query = {query: {match_all: {}}}
+        const response = await executeQuery(url, index, query)
+        hits = response.hits.hits
+        innerHits = hits
     }
     
     // let innerHits = []
@@ -53,7 +71,7 @@ async function load(){
             es_count: countJson.count,
             total_count: index['docs.count'],
             innerHitsLength: hits.length,
-            innerHits: hits,
+            //innerHits: hits,
         }
     }
     return {
@@ -88,20 +106,13 @@ const nestedDobsInnerHits =
     }
 }
 
-const nestedInnerHits = 
+const nestedAliasesInnerHits = 
 {
     "query": {
         "nested": {
             "path": "aliases",
             "query": {
               "match_all": {}
-            },
-            "inner_hits": {}
-        },
-        "nested": {
-            "path": "birth_dates",
-            "query": {
-                "match_all": {}
             },
             "inner_hits": {}
         }
