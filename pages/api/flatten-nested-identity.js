@@ -114,6 +114,16 @@ export async function generateBulkObject(){
     return string
 }
 
+export async function generateBulkNestedOnly(){
+    let string = ''
+    const initialObject = await getNestedIdentity()
+    
+    string = string + JSON.stringify({ "index" : {"_index" : "rni-nested"}}) + '\n' +
+        JSON.stringify(initialObject) + '\n'
+
+    return string
+}
+
 /**
  * Generates a bulk string for ElasticSearch.  Same as above, but takes a nested identity as a parameter.
  * @param {identity} nestedIdentity the identity to flatten

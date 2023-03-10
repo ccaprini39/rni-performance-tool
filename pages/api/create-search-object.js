@@ -74,7 +74,7 @@ export async function esAutoSearch(url, options){
     return results
 }
 
-export async function flatQuery(url, object){
+export async function flatQuery(url, object, explain = false){
     const {primary_name, birth_date, window_size}  = object
     let rniQuery = 
     {
@@ -112,11 +112,13 @@ export async function flatQuery(url, object){
         }
     }
     const query = {...rniQuery, ...rescorer}
-    let response = await executeQuery(url, 'rni-flat', query)
+    let response
+    if (!explain) response = await executeQuery(url, 'rni-flat', query)
+    else response = await executeExplainQuery(url, 'rni-flat', query)
     return response
 }
 
-export async function nestedDobQuery(url, object){
+export async function nestedDobQuery(url, object, explain = false){
     const {primary_name, birth_date, window_size}  = object
     let rniQuery = 
     {
@@ -186,11 +188,15 @@ export async function nestedDobQuery(url, object){
         ]
     }
     const query = {...rniQuery, ...rescorer}
-    let response = await executeQuery(url, 'rni-nested-dobs', query)
+    let response
+    if (explain === 0) response = await executeQuery(url, 'rni-nested-dobs', query)
+    if (explain === 1) response = await executeExplainQuery(url, 'rni-nested-dobs', query)
+    if (explain === 2) response = await executeExplainQuery(url, 'rni-nested-dobs', query)
     return response
 }
 
-export async function nestedQuery(url, object){
+//explain = 0 for no explain, 1 for the explain flag, 2 for using the actual explain api
+export async function nestedQuery(url, object, explain = 0){
     const {primary_name, birth_date, window_size}  = object
 
     let rniQuery = 
@@ -276,13 +282,118 @@ export async function nestedQuery(url, object){
         ]
     }
     const query = {...rniQuery, ...rescorer}
-    let response = await executeQuery(url, 'rni-nested', query)
+    let response
+    if (!explain) response = await executeQuery(url, 'rni-nested', query)
+    else response = await executeExplainQuery(url, 'rni-nested', query)
     return response
+}
+
+export async function createNestedQueryObject(){
+    const object = await createSearchObject()
+    const {primary_name, birth_date, window_size}  = object
+    let rniQuery = 
+    {
+        "query" : {
+            "bool" : {
+                "should" : [
+                    {
+                        "nested" : {
+                            "path" : "aliases",
+                            "query" : {
+                                "bool" : {
+                                    "should" : {
+                                        "match" : {"aliases.primary_name" : `{"data" : "${primary_name}", "entityType" : "PERSON"}`}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "nested" : {
+                            "path" : "birth_dates",
+                            "query" : {
+                                "bool" : {
+                                    "should" : {
+                                        "match" : {"birth_dates.birth_date" : birth_date}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+    let rescorer = 
+    {
+        "rescore" : [
+            {
+                "window_size" : window_size,
+                "rni_query" : {
+                    "rescore_query" : {
+                        "nested" : {
+                            "score_mode" : "max",
+                            "path" : "aliases",
+                            "query" : {
+                                "function_score" : {
+                                    "name_score" : {
+                                        "field" : "aliases.primary_name",
+                                        "query_name" : {"data" : primary_name, "entityType" : "PERSON"}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "score_mode" : "total",
+                    "query_weight" : 0.0,
+                    "rescore_query_weight" : 1.0
+                }
+            },
+            {
+                "window_size" : window_size,
+                "rni_query" : {
+                    "rescore_query" : {
+                        "nested" : {
+                            "score_mode" : "max",
+                            "path" : "birth_dates",
+                            "query" : {
+                                "function_score" : {
+                                    "date_score" : {
+                                        "field" : "birth_dates.birth_date",
+                                        "query_date" : birth_date
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "score_mode" : "total",
+                    "query_weight" : 0.0,
+                    "rescore_query_weight" :  1.0
+                }
+            }
+        ]
+    }
+    const query = {...rniQuery , ...rescorer}
+    return query
 }
 
 export async function executeQuery(url, index, query){
     let requestOptions = getPostRequestOptions(query)
     let response = await fetch(`${url}/${index}/_search?format=json`, requestOptions)
+    response = await response.json()
+    return response
+}
+
+export async function executeExplainQuery(url, index, query){
+    let requestOptions = getPostRequestOptions(query)
+    let response = await fetch(`${url}/${index}/_search?format=json&explain=true`, requestOptions)
+    response = await response.json()
+    return response
+}
+
+export async function executeExplainApiQuery(url, index, query){
+    let requestOptions = getPostRequestOptions(query)
+    let response = await fetch(`${url}/${index}/_explain?format=json`, requestOptions)
     response = await response.json()
     return response
 }
@@ -510,4 +621,17 @@ export async function verifyElasticWithTimeout(url, timeout = 100){
         return false
     }
     return false
+}
+
+//this uses the clear cache api from es to clear index caches
+export async function  clearEsCache(url){
+    let requestOptions = getPostRequestOptions()
+    let response = await fetch(`${url}/_cache/clear?format=json`, requestOptions)
+    if (response.ok){
+        response = await response.json()
+        return response
+    } else {
+        response = await response.json()
+    }
+    return response
 }

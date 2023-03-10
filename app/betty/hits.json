@@ -1,0 +1,125 @@
+[
+    [
+      {
+        "_index": "betty-nested-dobs",
+        "_type": "_doc",
+        "_id": "RFpozIYBnZs7r6LXevMj",
+        "_nested": {
+          "field": "birth_dates",
+          "offset": 0
+        },
+        "_score": 1,
+        "_source": {
+          "birth_date": "1978-01-01"
+        }
+      },
+      {
+        "_index": "betty-nested-dobs",
+        "_type": "_doc",
+        "_id": "RFpozIYBnZs7r6LXevMj",
+        "_nested": {
+          "field": "birth_dates",
+          "offset": 1
+        },
+        "_score": 1,
+        "_source": {
+          "birth_date": "1979-06-06"
+        }
+      },
+      {
+        "_index": "betty-nested-dobs",
+        "_type": "_doc",
+        "_id": "RFpozIYBnZs7r6LXevMj",
+        "_nested": {
+          "field": "birth_dates",
+          "offset": 2
+        },
+        "_score": 1,
+        "_source": {
+          "birth_date": "1980-12-12"
+        }
+      }
+    ],
+    [
+      {
+        "_index": "betty-nested-dobs",
+        "_type": "_doc",
+        "_id": "RVpozIYBnZs7r6LXevMj",
+        "_nested": {
+          "field": "birth_dates",
+          "offset": 0
+        },
+        "_score": 1,
+        "_source": {
+          "birth_date": "1978-01-01"
+        }
+      },
+      {
+        "_index": "betty-nested-dobs",
+        "_type": "_doc",
+        "_id": "RVpozIYBnZs7r6LXevMj",
+        "_nested": {
+          "field": "birth_dates",
+          "offset": 1
+        },
+        "_score": 1,
+        "_source": {
+          "birth_date": "1979-06-06"
+        }
+      },
+      {
+        "_index": "betty-nested-dobs",
+        "_type": "_doc",
+        "_id": "RVpozIYBnZs7r6LXevMj",
+        "_nested": {
+          "field": "birth_dates",
+          "offset": 2
+        },
+        "_score": 1,
+        "_source": {
+          "birth_date": "1980-12-12"
+        }
+      }
+    ],
+    [
+      {
+        "_index": "betty-nested-dobs",
+        "_type": "_doc",
+        "_id": "RlpozIYBnZs7r6LXevMj",
+        "_nested": {
+          "field": "birth_dates",
+          "offset": 0
+        },
+        "_score": 1,
+        "_source": {
+          "birth_date": "1978-01-01"
+        }
+      },
+      {
+        "_index": "betty-nested-dobs",
+        "_type": "_doc",
+        "_id": "RlpozIYBnZs7r6LXevMj",
+        "_nested": {
+          "field": "birth_dates",
+          "offset": 1
+        },
+        "_score": 1,
+        "_source": {
+          "birth_date": "1979-06-06"
+        }
+      },
+      {
+        "_index": "betty-nested-dobs",
+        "_type": "_doc",
+        "_id": "RlpozIYBnZs7r6LXevMj",
+        "_nested": {
+          "field": "birth_dates",
+          "offset": 2
+        },
+        "_score": 1,
+        "_source": {
+          "birth_date": "1980-12-12"
+        }
+      }
+    ]
+]
