@@ -74,7 +74,7 @@ export async function esAutoSearch(url, options){
     return results
 }
 
-export async function flatQuery(url, object, explain = false){
+export async function flatQuery(url, object, explain = 0){
     const {primary_name, birth_date, window_size}  = object
     let rniQuery = 
     {
@@ -113,12 +113,13 @@ export async function flatQuery(url, object, explain = false){
     }
     const query = {...rniQuery, ...rescorer}
     let response
-    if (!explain) response = await executeQuery(url, 'rni-flat', query)
-    else response = await executeExplainQuery(url, 'rni-flat', query)
+    if (explain === 0) response = await executeQuery(url, 'rni-flat', query)
+    if (explain === 1) response = await executeExplainQuery(url, 'rni-flat', query)
+    if (explain === 2) response = await executeExplainQuery(url, 'rni-flat', query)
     return response
 }
 
-export async function nestedDobQuery(url, object, explain = false){
+export async function nestedDobQuery(url, object, explain = 0){
     const {primary_name, birth_date, window_size}  = object
     let rniQuery = 
     {

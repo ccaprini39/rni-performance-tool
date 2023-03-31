@@ -1,6 +1,7 @@
 import { indexBetty } from "../../pages/api/betty";
 import { executeQuery, sleep } from "../../pages/api/create-search-object";
 import { deleteIndex } from "../elastic-instances/[id]/utils";
+import BettyView from "./components/BettyView";
 
 async function getInternalDocs(url, index){
     let query
@@ -71,7 +72,7 @@ async function load(){
             es_count: countJson.count,
             total_count: index['docs.count'],
             innerHitsLength: hits.length,
-            //innerHits: hits,
+            innerHits: hits,
         }
     }
     return {
@@ -86,8 +87,7 @@ export default async function BettyPage(){
 
     return (
         <div>
-            <h1>betty</h1>
-            <pre>{JSON.stringify(indices, null, 2)}</pre>
+            <BettyView bettyInfo={indices}/>
         </div>
     )
 

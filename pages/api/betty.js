@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     res.status(200).json({ value: 10 })
 }
 
-const betty = 
+export const betty = 
 {
     "ucn": "333D",
     "aliases": [
@@ -62,8 +62,8 @@ const betty =
     ]
 }
 
-const nestedDobBetty = flattenNames(betty)
-const flatBetty = flattenEverything(betty)
+export const nestedDobBetty = flattenNames(betty)
+export const flatBetty = flattenEverything(betty)
 
 export function getAllOfBetty(){
     return { betty: betty, nestedDobBetty: nestedDobBetty, flatBetty: flatBetty }

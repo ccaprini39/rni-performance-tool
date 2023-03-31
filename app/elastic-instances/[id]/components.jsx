@@ -99,7 +99,12 @@ export default function IndexTable({ indices, id }) {
 
     useEffect(() => {
         if (hiddenStatus) {
-            setCurrentIndices(filterHiddenIndices(indices))
+            //filter all that don't start with rni-
+            const filteredIndices = indices.filter((index) => {
+                return index.index.startsWith('rni-')
+            })
+            setCurrentIndices(filteredIndices)
+            //setCurrentIndices(filterHiddenIndices(indices))
         }
         else {
             setCurrentIndices(indices)
