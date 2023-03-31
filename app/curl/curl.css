@@ -1,0 +1,24 @@
+.url-view {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+}
+
+.request-box {
+    background-color: lightblue;
+    height: 35vh;
+    margin: 10px;
+}
+
+.response-box {
+    background-color: lightgreen;
+    margin: 10px;
+    height: 40vh;
+}
